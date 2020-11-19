@@ -43,9 +43,10 @@ router.get('/measurementsInRange', function(req, res, next){
   var q = "SELECT 	JD.journal_id, 	\
                       JD.journalDetails_id, 	\
                       JD.dateTime, \
+                      OP.operation_id, \
                       JD.product_id, \
                       JD.station_id, \
-                      JD.step_id, M.description, 	\
+                      M.description, 	\
                       M.measure_id, \
                       MV.m_values, 	\
                       M.measureDimension \

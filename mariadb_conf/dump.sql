@@ -306,7 +306,7 @@ CREATE TABLE IF NOT EXISTS JournalDetails
   dateTime DATETIME NOT NULL,
   product_id BIGINT NOT NULL,
   name TEXT(64) NOT NULL,
-  station_id INT NOT NULL,
+  station_id TEXT(64) NOT NULL,
   materialUsedAsCarrier_id BIGINT NOT NULL,
   materialUsedAsTarget_id BIGINT NOT NULL, 
   materialTransformation_id BIGINT NOT NULL,
