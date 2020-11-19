@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+    nginx:
+        hostname: nginx
+        image: nginx:latest
+        networks:
+          - hostnet
+        ports:
+          - "8080:80"
+        depends_on:
+          - qu4lity_cloud_bridge
+        volumes:
+          - ./nginx_conf/.htpasswd:/etc/nginx/.htpasswd
+          - ./nginx_conf/nginx.conf:/etc/nginx/nginx.conf
+
+    qu4lity_cloud_bridge:
+        hostname: qu4lity_cloud_bridge
+        image: node:14
+        networks:
+          - hostnet
+        expose:
+          - "9000"
+        user: "node"
+        working_dir: /home/node/app
+        depends_on:
+          - mpfq_mariadb
+        environment:
+          - NODE_ENV=production
+          - PORT=9000
+          - MPFQ_MARIADB_HOST=mpfq_mariadb
+          - MPFQ_MARIADB_PORT=3306
+          - MPFQ_MARIADB_DB=whr_mpfq_relational
+          - MPFQ_MARIADB_USER=root
+          - MPFQ_MARIADB_PASSWORD=Qu4lity!P@ssw0rd
+        volumes:
+          - ./node_conf/qu4lity-cloud-bridge:/home/node/app
+        command: "npm start"
+
+    mpfq_mariadb:
+        hostname: mpfq_mariadb
+        image: mariadb:latest
+        networks:
+          - hostnet
+        ports:
+          - "3306:3306"
+        volumes:
+          - container-volume:/var/lib/mysql
+          - ./mariadb_conf/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+        environment:
+          - MYSQL_ROOT_PASSWORD=Qu4lity!P@ssw0rd
+
+volumes:
+  container-volume:
+
+networks:
+   hostnet:
