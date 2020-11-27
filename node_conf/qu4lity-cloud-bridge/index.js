@@ -51,6 +51,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(config.port, function () {
-  console.log("QU4LITY Cloud Bridge server is up and running and it's listening on port:" + config.port);
+  console.log("QU4LITY Cloud Rest Bridge server is up and running and it's listening on port:" + config.port);
 });
 
