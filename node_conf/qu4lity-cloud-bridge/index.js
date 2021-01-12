@@ -15,6 +15,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(require('method-override')());
 
+const db = require("./models");
+if (!isProduction) {
+  db.sequelize.sync({ force: false }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
+}else{
+  db.sequelize.sync();
+}
+
 if (!isProduction) {
   app.use(errorhandler());
 }

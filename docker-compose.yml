@@ -32,7 +32,7 @@ services:
           - MPFQ_MARIADB_PORT=3306
           - MPFQ_MARIADB_DB=whr_mpfq_relational
           - MPFQ_MARIADB_USER=root
-          - MPFQ_MARIADB_PASSWORD=Qu4lity!P@ssw0rd
+          - MPFQ_MARIADB_PASSWORD=r00t
         volumes:
           - ./node_conf/qu4lity-cloud-bridge:/home/node/app
         command: "npm start"
@@ -48,7 +48,7 @@ services:
           - container-volume:/var/lib/mysql
           - ./mariadb_conf/dump.sql:/docker-entrypoint-initdb.d/dump.sql
         environment:
-          - MYSQL_ROOT_PASSWORD=Qu4lity!P@ssw0rd
+          - MYSQL_ROOT_PASSWORD=r00t
 
 volumes:
   container-volume:

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.use('/1.0', require('./mpfq'));
+router.use('/1.0', require('./routes'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){
