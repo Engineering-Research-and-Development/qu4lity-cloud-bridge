@@ -16,21 +16,21 @@ let needsDecoding = ["vRMSfreqPump",
                       "PressureSensor3",
                       "PressureSensor4"
                       ]
-                        
+
 // Retrieve all Measures from the database.
 exports.findAll = (req, res) => {
     const type = req.body.type;
     const from = req.body.from;
-    const to = req.body.to; 
-    const limit = req.body.limit; 
-    var offset = req.body.offset; 
+    const to = req.body.to;
+    const limit = req.body.limit;
+    var offset = req.body.offset;
     const toBeDecoded = req.body.decoded ;
     var toDecode = true;
 
     if(toBeDecoded)
         toDecode = (toBeDecoded == 'true')
 
-    var condition = {}  
+    var condition = {}
     if(from && to)
       condition["dateTime"] =  { [db.Op.gte]: `${from}`, [db.Op.lte]: `${to}` }
     else if(from)
@@ -43,8 +43,8 @@ exports.findAll = (req, res) => {
     if(!offset)
       offset = 0
 
-    db.Measure.findAll({ 
-      include:[ 
+    db.Measure.findAll({
+      include:[
         { model: db.MeasureValues, as: 'MeasureValues' },
         { model: db.MeasureKO, as: 'MeasureKO' },
         { model: db.Specification, as: 'Specification' }
@@ -97,7 +97,7 @@ exports.findOne = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
+          message: "Error retrieving Measure with id=" + id
         });
       });
 };
