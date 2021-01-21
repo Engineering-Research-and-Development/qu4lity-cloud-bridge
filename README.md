@@ -6,7 +6,6 @@ QU4LITY Cloud Infrastructure provides a seamless solution to exchange data using
 -   [Architecture](#architecture)
 -   [Install](#install)
   -   [Docker install](#docker---recommended)
-  -   [WebServer Install](#webserver)
 -   [API](#api)
 
 ## Architecture
