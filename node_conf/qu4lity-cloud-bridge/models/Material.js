@@ -2,36 +2,12 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('Material', {
+    material_id: {
       autoIncrement: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
-    },
-    measure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Measure',
-        key: 'measure_id'
-      }
-    },
-    dataSeriesUSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    dataSeriesLSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
-      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
@@ -39,11 +15,35 @@ module.exports = function(sequelize, DataTypes) {
     },
     type: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    name: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    materialModel: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    materialFamily_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'MaterialFamily',
+        key: 'materialFamily_id'
+      }
+    },
+    functionUnit_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'Material',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -52,14 +52,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
+          { name: "material_id" },
         ]
       },
       {
-        name: "specification_fk",
+        name: "material_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "materialFamily_id" },
         ]
       },
     ]

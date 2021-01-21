@@ -2,8 +2,8 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Measure', {
-    measure_id: {
+  return sequelize.define('MaterialFamily', {
+    materialFamily_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -13,21 +13,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    type: {
+    name: {
       type: DataTypes.TEXT,
-      allowNull: false
-    },
-    measureDimension: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    dateTime: {
-      type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'Measure',
+    tableName: 'MaterialFamily',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -36,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "materialFamily_id" },
         ]
       },
     ]

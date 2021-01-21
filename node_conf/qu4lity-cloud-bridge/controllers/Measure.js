@@ -1,5 +1,7 @@
-const { Specification } = require("../models");
-const db = require("../models")
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+const models = require("../models").models
+
 const utils = require("../utils")
 
 let needsDecoding = ["vRMSfreqPump",
@@ -32,22 +34,22 @@ exports.findAll = (req, res) => {
 
     var condition = {}
     if(from && to)
-      condition["dateTime"] =  { [db.Op.gte]: `${from}`, [db.Op.lte]: `${to}` }
+      condition["dateTime"] =  { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
     else if(from)
-      condition["dateTime"] =  { [db.Op.gte]: `${from}` }
+      condition["dateTime"] =  { [Op.gte]: `${from}` }
     else if(to)
-      condition["dateTime"] =  { [db.Op.lte]: `${to}` }
+      condition["dateTime"] =  { [Op.lte]: `${to}` }
     if(type)
-      condition["$Specification.type$"] =  { [db.Op.eq]: `${type}` }
+      condition["$Specification.type$"] =  { [Op.eq]: `${type}` }
 
     if(!offset)
       offset = 0
 
-    db.Measure.findAll({
+    models.Measure.findAll({
       include:[
-        { model: db.MeasureValues, as: 'MeasureValues' },
-        { model: db.MeasureKO, as: 'MeasureKO' },
-        { model: db.Specification, as: 'Specification' }
+        { model: models.MeasureValues, as: 'MeasureValues' },
+        //{ model: models.MeasureKO, as: 'MeasureKO' },
+        { model: models.Specification, as: 'Specifications' }
       ],
       where: condition,
       order: [['measure_id','DESC']],
@@ -89,15 +91,15 @@ exports.findAll = (req, res) => {
 
 // Find a single Measure with an id
 exports.findOne = (req, res) => {
-    const id = req.params.id;
+  const measure_id = req.body.measure_id;
 
-    db.Measure.findByPk(id)
+  models.Measure.findByPk(measure_id)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Measure with id=" + id
+          message: "Error retrieving Measure with id=" + measure_id
         });
       });
 };

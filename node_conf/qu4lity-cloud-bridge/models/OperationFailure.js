@@ -2,19 +2,19 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('MeasureKO', {
-    measureKO_id: {
+  return sequelize.define('OperationFailure', {
+    operationFailure_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
+    resource_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Resource',
+        key: 'resource_id'
       }
     },
     failureType_id: {
@@ -25,20 +25,12 @@ module.exports = function(sequelize, DataTypes) {
         key: 'failureType_id'
       }
     },
-    product_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: 'Product',
-        key: 'product_id'
-      }
-    },
-    dateTime: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
     recoveryTime: {
       type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    occuranceDate: {
+      type: DataTypes.DATE,
       allowNull: false
     },
     description: {
@@ -47,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'MeasureKO',
+    tableName: 'OperationFailure',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -56,28 +48,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "measureKO_id" },
+          { name: "operationFailure_id" },
         ]
       },
       {
-        name: "measureKO_fk_1",
+        name: "operationFailure_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "resource_id" },
         ]
       },
       {
-        name: "measureKO_fk_2",
+        name: "operationFailure_fk_2",
         using: "BTREE",
         fields: [
           { name: "failureType_id" },
-        ]
-      },
-      {
-        name: "measureKO_fk_3",
-        using: "BTREE",
-        fields: [
-          { name: "product_id" },
         ]
       },
     ]

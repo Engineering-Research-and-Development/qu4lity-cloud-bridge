@@ -2,48 +2,48 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('JournalDetails', {
+    journalDetails_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
+    journal_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Journal',
+        key: 'journal_id'
       }
-    },
-    dataSeriesUSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    dataSeriesLSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
-      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    type: {
+    overallResult: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    dateTime: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    overallDefectCode: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    station_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Station',
+        key: 'station_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'JournalDetails',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -52,14 +52,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
+          { name: "journalDetails_id" },
         ]
       },
       {
-        name: "specification_fk",
+        name: "journalDetails_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "journal_id" },
+        ]
+      },
+      {
+        name: "journalDetails_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "station_id" },
         ]
       },
     ]

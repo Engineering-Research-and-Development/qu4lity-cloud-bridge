@@ -2,10 +2,10 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Product', {
-    product_id: {
+  return sequelize.define('Journal', {
+    journal_id: {
       autoIncrement: true,
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -21,17 +21,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    commercialModel_id: {
-      type: DataTypes.INTEGER,
+    startDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
-    descriptionModel_id: {
-      type: DataTypes.INTEGER,
+    endDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false
+    },
+    status: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    productionLine_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'ProductionLine',
+        key: 'productionLine_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'Product',
+    tableName: 'Journal',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -40,14 +52,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "product_id" },
+          { name: "journal_id" },
         ]
       },
       {
-        name: "product_fk_1",
+        name: "journal_fk_1",
         using: "BTREE",
         fields: [
           { name: "productionOrder_id" },
+        ]
+      },
+      {
+        name: "journal_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "productionLine_id" },
         ]
       },
     ]

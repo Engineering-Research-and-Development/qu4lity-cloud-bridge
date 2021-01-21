@@ -2,48 +2,40 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('Function', {
+    function_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
+    resource_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Resource',
+        key: 'resource_id'
       }
     },
-    dataSeriesUSL: {
+    carrier: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
-    dataSeriesLSL: {
+    object: {
       type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
     type: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'Function',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -52,14 +44,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
+          { name: "function_id" },
         ]
       },
       {
-        name: "specification_fk",
+        name: "function_fk",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "resource_id" },
         ]
       },
     ]

@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize');
+/* jshint indent: 2 */
 
+const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('FailureType', {
     failureType_id: {
@@ -10,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     setOfSymptoms: {
       type: DataTypes.TEXT,

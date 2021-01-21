@@ -2,48 +2,36 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('Property', {
+    property_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Measure',
-        key: 'measure_id'
-      }
-    },
-    dataSeriesUSL: {
+    name: {
       type: DataTypes.TEXT,
-      allowNull: true
-    },
-    dataSeriesLSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    type: {
+    property1: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
+    },
+    property2: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    property3: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'Property',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -52,14 +40,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
-        ]
-      },
-      {
-        name: "specification_fk",
-        using: "BTREE",
-        fields: [
-          { name: "measure_id" },
+          { name: "property_id" },
         ]
       },
     ]

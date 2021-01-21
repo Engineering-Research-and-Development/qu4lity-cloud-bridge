@@ -2,36 +2,32 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Product', {
+  return sequelize.define('Product_Material', {
     product_id: {
-      autoIncrement: true,
       type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
-    },
-    productionOrder_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'ProductionOrder',
-        key: 'productionOrder_id'
+        model: 'Product',
+        key: 'product_id'
       }
     },
-    industrialModel_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    material_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Material',
+        key: 'material_id'
+      }
     },
-    commercialModel_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    descriptionModel_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Product',
+    tableName: 'Product_Material',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -41,13 +37,14 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "product_id" },
+          { name: "material_id" },
         ]
       },
       {
-        name: "product_fk_1",
+        name: "product_material_fk_2",
         using: "BTREE",
         fields: [
-          { name: "productionOrder_id" },
+          { name: "material_id" },
         ]
       },
     ]

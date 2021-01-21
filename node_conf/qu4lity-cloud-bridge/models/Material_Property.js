@@ -2,28 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('MeasureValues', {
-    values_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+  return sequelize.define('Material_Property', {
+    material_id: {
+      type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
-    },
-    measure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Material',
+        key: 'material_id'
       }
     },
-    m_values: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    property_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Property',
+        key: 'property_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'MeasureValues',
+    tableName: 'Material_Property',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -32,14 +32,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "values_id" },
+          { name: "material_id" },
+          { name: "property_id" },
         ]
       },
       {
-        name: "values_fk",
+        name: "material_property_fk_2",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "property_id" },
         ]
       },
     ]

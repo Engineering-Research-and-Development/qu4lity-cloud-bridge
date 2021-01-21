@@ -2,48 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('RecoveryProcedure', {
+    recoveryProcedure_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
+    failureType_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'FailureType',
+        key: 'failureType_id'
       }
     },
-    dataSeriesUSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    dataSeriesLSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    type: {
+    name: {
       type: DataTypes.TEXT,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'RecoveryProcedure',
     schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
@@ -52,14 +32,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
+          { name: "recoveryProcedure_id" },
         ]
       },
       {
-        name: "specification_fk",
+        name: "recoveryProcedure_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "failureType_id" },
         ]
       },
     ]
