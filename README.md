@@ -93,7 +93,7 @@ docker-compose up
 </table>
 
 
-N.B **nginx** is configured to use **Basic authentication**, please remember either to configure it properly in _nginx_conf_ folder or to include the authorization header in your HTTP request as shown in the following example
+N.B **nginx** is configured to use **Basic authentication**, please remember either to configure it properly in _'nginx_conf'_ folder or to include the authorization header in your HTTP request as shown in the following example
 
 ##### Request Example
 
