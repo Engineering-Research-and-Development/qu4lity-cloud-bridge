@@ -3,16 +3,10 @@ QU4LITY Cloud Infrastructure provides a seamless solution to exchange data using
 
 ## Contents
 
--   [Architecture](#architecture)
 -   [Install](#install)
-  -   [Docker install](#docker---recommended)
+    -   [Docker install](#docker---recommended)
+-   [Architecture](#architecture)
 -   [API](#api)
-
-## Architecture
-
-![FI-MIND Schema](docs/images/QCloudBridge.png)
-
-In the picture above it's worth pointing out that QU4LITY Cloud Bridge but more generally QU4LITY Cloud Infrastructure aims building an abstraction layer on top of pre-exisitng Infrastructures to make them compliant to QU4LITY data model standards. To this extent, interoperability is the main goal which have been targeted during the whole development, thus the most varied on-premise data lake are supported by QU4LITY Cloud Infrastructure.
 
 ## Getting Started - install
 
@@ -26,6 +20,12 @@ To instantiate the whole QU4LITY Cloud Infrastructure use docker-compose which w
 ```sh
 docker-compose up
 ```
+
+## Architecture
+
+![FI-MIND Schema](docs/images/QCloudBridge.png)
+
+In the picture above it's worth pointing out that QU4LITY Cloud Bridge but more generally QU4LITY Cloud Infrastructure aims building an abstraction layer on top of pre-exisitng Infrastructures to make them compliant to QU4LITY data model standards. To this extent, interoperability is the main goal which have been targeted during the whole development, thus the most varied on-premise data lake are supported by QU4LITY Cloud Infrastructure.
 
 ## API
 
