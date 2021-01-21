@@ -92,6 +92,9 @@ docker-compose up
  </tbody>
 </table>
 
+
+N.B **nginx** is configured to use **Basic authentication**, please remember either to configure it properly in _nginx_conf_ folder or to include the authorization header in your HTTP request as shown in the following example
+
 ##### Request Example
 
 ```sh
