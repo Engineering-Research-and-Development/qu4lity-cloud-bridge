@@ -4,8 +4,6 @@ const models = require("../models").models
 
 // Retrieve all ProductionLines from the database.
 exports.findAll = (req, res) => {
-    const type = req.body.machinery_id
-
     var condition = {}
 
     models.ProductionLine.findAll({
