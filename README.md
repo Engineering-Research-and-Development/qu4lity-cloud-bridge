@@ -6,6 +6,7 @@ QU4LITY Cloud Infrastructure provides a seamless solution to exchange data using
 -   [Install](#install)
     -   [Docker install](#docker---recommended)
 -   [API](#api)
+-   [License](#license)
 
 ## Getting Started - install
 
@@ -103,3 +104,7 @@ curl --location --request POST 'http://localhost:8080/mpfq/api/1.0/stations' \
 --header 'Authorization: Basic ZXhhbXBsZXVzZXI6cXU0bGl0eSE=' \
 --data-raw '{}'
 ```
+## License
+QU4LITY Cloud Bridge is licensed under the
+
+GNU Affero General Public License v3.0
