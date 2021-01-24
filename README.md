@@ -1,5 +1,5 @@
 # ![FI-MIND Schema](docs/images/QU4LITY.png) Cloud Bridge
-QU4LITY Cloud Infrastructure provides a seamless solution to exchange data using the QU4LITY Ontology Model (based on R-MPFQ), enabling a semantic enriched data exchange from on-premise data lake to QU4LITY Cloud Data Storage using a time-based approach. The developed QU4LITY Cloud Bridge offers a REST API layer to ease the interfaces with other processing and visualization components pilot taking care of any data decoding/encoding needs (i.e. IEEE754 data encoding)
+QU4LITY Cloud Infrastructure provides a seamless solution to exchange data using the QU4LITY Ontology Model (based on R-MPFQ), enabling a semantic enriched data exchange from on-premise data lake to QU4LITY Cloud Data Storage using a time-based approach. The developed QU4LITY Cloud Bridge offers a REST API layer to ease the interfaces with other processing and visualization components taking care of any data decoding/encoding needs (i.e. IEEE754 data encoding)
 
 ## Contents
 
