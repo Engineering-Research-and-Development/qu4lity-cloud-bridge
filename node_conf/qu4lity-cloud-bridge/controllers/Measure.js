@@ -65,12 +65,12 @@ exports.findAll = (req, res) => {
         json["dateTime"] = row.dateTime;
         json["type"] = row.type;
         json["measureDimension"] = row.measureDimension;
-        json["specDescription"] = row.Specification.description;
-        json["specType"] = row.Specification.type;
-        json["specUsl"] = row.Specification.usl;
-        json["specLsl"] = row.Specification.lsl;
+        json["specDescription"] = row.Specifications.description;
+        json["specType"] = row.Specifications.type;
+        json["specUsl"] = row.Specifications.usl;
+        json["specLsl"] = row.Specifications.lsl;
 
-        if(toDecode && needsDecoding.indexOf(row.Specification.type) > -1){
+        if(toDecode && needsDecoding.indexOf(row.Specifications.type) > -1){
           var extracted = utils.iee754Extractor(row.MeasureValues.m_values);
           Object.assign(json,extracted);
         }else{
