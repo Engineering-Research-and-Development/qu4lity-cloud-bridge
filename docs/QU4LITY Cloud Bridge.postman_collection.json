@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "39833460-f015-448d-8541-0c86767cd192",
+		"name": "QU4LITY Cloud Bridge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "measureSensorsEncoded",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\":\"2020-02-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100,\r\n    \"decoded\":\"false\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/measureSensors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"measureSensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "measureSensorsDecoded",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\":\"2020-02-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100,\r\n    \"decoded\":\"true\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/measureSensors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"measureSensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "measureTests",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"2020-02-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/measureTests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"measureTests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stations",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/stations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"stations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "functions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/functions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"functions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productionLines",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/productionLines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"productionLines"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

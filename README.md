@@ -46,22 +46,40 @@ docker-compose up
 
   <tr>
    <td>POST</td>
-   <td>/measure</td>
-   <td>Returns given measure by passing <a>measure_id</a> as body parameter</td>
+   <td>/measureSensor</td>
+   <td>Returns given sensor measure by passing <a>measure_id</a> as body parameter</td>
   </tr>
   <tr>
    <td>POST</td>
-   <td>/measures</td>
-   <td>Returns all measures. You can pass the followings as body parameter:
+   <td>/measureSensors</td>
+   <td>Returns all sensors measures. You can pass the followings as body parameter:
      <ul>
-      <li><a>type</a>: String</li>
       <li><a>from</a>: Date</li>
       <li><a>to</a>: Date</li>
       <li><a>limit</a>: Int</li>
       <li><a>offset</a>: Int</li>
-      <li><a>decoded</a>: Bool</li>
      </ul>
    </td>
+  </tr>
+  
+  <tr>
+   <td>POST</td>
+  <td>/measureTest</td>
+  <td>Returns given test measure by passing <a>measure_id</a> as body parameter</td>
+  </tr>
+  <tr>
+  <td>POST</td>
+  <td>/measureTests</td>
+  <td>Returns all test measures. You can pass the followings as body parameter:
+    <ul>
+     <li><a>type</a>: String - MANDATORY</li>
+     <li><a>from</a>: Date</li>
+     <li><a>to</a>: Date</li>
+     <li><a>limit</a>: Int</li>
+     <li><a>offset</a>: Int</li>
+     <li><a>decoded</a>: Bool</li>
+    </ul>
+  </td>
   </tr>
 
   <tr>
@@ -92,6 +110,8 @@ docker-compose up
 
  </tbody>
 </table>
+
+You can download an example of Postman collection [here](docs/postman_collection.json)
 
 
 N.B **nginx** is configured to use **Basic authentication**, please remember either to configure it properly in _'nginx_conf'_ folder or to include the authorization header in your HTTP request as shown in the following example
