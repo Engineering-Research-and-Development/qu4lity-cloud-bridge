@@ -127,7 +127,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from\":\"2020-02-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100\r\n}"
+					"raw": "{\r\n    \"from\":\"2020-01-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/measureTests",
