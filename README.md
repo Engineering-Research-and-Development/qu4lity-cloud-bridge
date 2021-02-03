@@ -14,7 +14,7 @@ To instantiate the whole QU4LITY Cloud Infrastructure use docker-compose which w
 
 ### Docker - Recommended
 
-1. Replace _'dump.sql'_ file in _'mariadb_conf'_ folder with your pre-existing dump if any.
+1. Fill _'mariadb_conf'_ folder with your pre-existing dumps if any.
 2. Configure your environment variables in the _'docker-compose.yml'_ file  
 3. Run docker-compose command into project root folder:
 ```sh
