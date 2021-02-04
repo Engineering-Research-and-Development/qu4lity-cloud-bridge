@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     occuranceDate: {
-      type: DataTypes.DATE(3),
+      type: DataTypes.DATE(6),
       allowNull: false
     },
     description: {
