@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Measure
   description TEXT(64),
   type TEXT(16) NOT NULL,
   measureDimension TEXT(16) NOT NULL,
-  dateTime DATETIME(6) NOT NULL,
+  dateTime DATETIME(3) NOT NULL,
   PRIMARY KEY (measure_id)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS ProductionLine
 CREATE TABLE IF NOT EXISTS Property
 ( property_id INT NOT NULL AUTO_INCREMENT,
   name TEXT(32) NOT NULL,
-  description TEXT(64), 
+  description TEXT(64),
   property1 TEXT(64),
   property2 TEXT(64),
   property3 TEXT(64),
@@ -92,14 +92,14 @@ CREATE TABLE IF NOT EXISTS MeasureValues
 
 CREATE TABLE IF NOT EXISTS ProductionOrder
 ( productionOrder_id INT NOT NULL AUTO_INCREMENT,
-  industrialModel_id INT NOT NULL, 
+  industrialModel_id INT NOT NULL,
   commercialModel_id INT NOT NULL,
   descriptionModel_id INT NOT NULL,
   startDate DATE NOT NULL,
   earliestDate DATE NOT NULL,
   dueDate DATE NOT NULL,
   quantity INT NOT NULL,
-  initial_sn TEXT(64) NOT NULL, 
+  initial_sn TEXT(64) NOT NULL,
   final_sn TEXT(64) NOT NULL,
   productionLine_id INT NOT NULL DEFAULT '0',
   PRIMARY KEY (productionOrder_id),
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS Material
 CREATE TABLE IF NOT EXISTS Product
 ( product_id BIGINT NOT NULL AUTO_INCREMENT,
   productionOrder_id INT NOT NULL,
-  industrialModel_id INT NOT NULL, 
+  industrialModel_id INT NOT NULL,
   commercialModel_id INT NOT NULL,
   descriptionModel_id INT NOT NULL,
   PRIMARY KEY (product_id),
@@ -207,9 +207,9 @@ CREATE TABLE IF NOT EXISTS JournalDetails
   journal_id INT NOT NULL,
   description TEXT(64),
   overallResult TEXT(64) NOT NULL,
-  dateTime DATETIME(6) NOT NULL,
-  overallDefectCode TEXT(16), 
-  station_id INT NOT NULL, 
+  dateTime DATETIME(3) NOT NULL,
+  overallDefectCode TEXT(16),
+  station_id INT NOT NULL,
   PRIMARY KEY (journalDetails_id),
   CONSTRAINT journalDetails_fk_1 FOREIGN KEY (journal_id) REFERENCES Journal(journal_id) ON DELETE CASCADE,
   CONSTRAINT journalDetails_fk_2 FOREIGN KEY (station_id) REFERENCES Station(station_id) ON DELETE CASCADE
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS OperationFailure
   resource_id INT NOT NULL,
   failureType_id INT NOT NULL,
   recoveryTime INT NOT NULL,
-  occuranceDate DATETIME(6) NOT NULL, 
+  occuranceDate DATETIME(3) NOT NULL,
   description TEXT(64),
   PRIMARY KEY (operationFailure_id),
   CONSTRAINT operationFailure_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS ResourceFailure
   resource_id INT NOT NULL,
   failureType_id INT NOT NULL,
   recoveryTime INT NOT NULL,
-  occuranceDate DATETIME(6) NOT NULL, 
+  occuranceDate DATETIME(3) NOT NULL,
   description TEXT(64),
   PRIMARY KEY (resourcenFailure_id),
   CONSTRAINT resourceFailure_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS MeasureKO
   measure_id INT NOT NULL,
   failureType_id INT NOT NULL,
   product_id BIGINT NOT NULL,
-  dateTime DATETIME(6) NOT NULL,
+  dateTime DATETIME(3) NOT NULL,
   recoveryTime INT NOT NULL,
   description TEXT(64),
   PRIMARY KEY (measureKO_id),
@@ -265,11 +265,11 @@ CREATE TABLE IF NOT EXISTS Operation
 ( operation_id INT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
   duration INT(64) NOT NULL,
-  dateTime DATETIME(6) NOT NULL,
-  product_id BIGINT NOT NULL, 
+  dateTime DATETIME(3) NOT NULL,
+  product_id BIGINT NOT NULL,
   operationType_id INT NOT NULL,
   materialUsedAsCarrier_id BIGINT NOT NULL,
-  materialUsedAsTarget_id BIGINT NOT NULL, 
+  materialUsedAsTarget_id BIGINT NOT NULL,
   materialTransformation_id BIGINT NOT NULL,
   resource_id INT NOT NULL,
   PRIMARY KEY (operation_id),
@@ -340,19 +340,3 @@ CREATE TABLE IF NOT EXISTS Resource_Measure
   CONSTRAINT resource_measure_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
   CONSTRAINT resource_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-  
-    
