@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     dateTime: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE(3),
       allowNull: false
     },
     overallDefectCode: {
