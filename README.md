@@ -101,7 +101,7 @@ docker-compose up
   <tr>
    <td>POST</td>
    <td>/stations</td>
-   <td>Returns all station. You can pass the followings as body parameter:
+   <td>Returns all stations. You can pass the followings as body parameter:
      <ul>
       <li><a>machinery_id</a>: Int</li>
      </ul>
