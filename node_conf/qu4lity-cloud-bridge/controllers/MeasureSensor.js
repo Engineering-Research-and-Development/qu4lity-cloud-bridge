@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
         { model: models.Specification, as: 'Specifications', where: { type: { [Op.eq]: `${type}` } } }
       ],
       where: condition,
-      order: [['measure_id','DESC']],
+      order: [['dateTime','DESC']],
       limit: limit,
       offset: offset
     })
