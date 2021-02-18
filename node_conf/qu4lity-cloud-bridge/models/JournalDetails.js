@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     dateTime: {
-      type: DataTypes.DATE(6),
+      type: DataTypes.DATE,
       allowNull: false
     },
     overallDefectCode: {
@@ -44,7 +44,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'JournalDetails',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

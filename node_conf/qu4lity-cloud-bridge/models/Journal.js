@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     productionOrder_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       references: {
         model: 'ProductionOrder',
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     industrialModel_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
     startDate: {
@@ -44,7 +44,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'Journal',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

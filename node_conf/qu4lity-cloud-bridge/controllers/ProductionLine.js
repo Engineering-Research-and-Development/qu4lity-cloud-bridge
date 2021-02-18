@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
         res.status(500).send({
             message:
-            err.message || "Some error occurred while retrieving measures."
+            err.message || "Some error occurred while retrieving ProductionLines."
         });
     });
 };
@@ -41,7 +41,7 @@ exports.findOne = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Station with id=" + productionLine_id
+          message: "Error retrieving ProductionLine with id=" + productionLine_id
         });
       });
 };

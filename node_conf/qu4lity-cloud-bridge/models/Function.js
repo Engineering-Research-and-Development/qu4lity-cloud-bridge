@@ -17,15 +17,31 @@ module.exports = function(sequelize, DataTypes) {
         key: 'resource_id'
       }
     },
+    materialUsedAsCarrier_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'Material',
+        key: 'material_id'
+      }
+    },
     carrier: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    object: {
+    function: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    type: {
+    materialUsedAsTarget_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'Material',
+        key: 'material_id'
+      }
+    },
+    object: {
       type: DataTypes.TEXT,
       allowNull: false
     },
@@ -36,7 +52,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'Function',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {
@@ -48,10 +63,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "function_fk",
+        name: "function_fk_1",
         using: "BTREE",
         fields: [
           { name: "resource_id" },
+        ]
+      },
+      {
+        name: "function_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "materialUsedAsCarrier_id" },
+        ]
+      },
+      {
+        name: "function_fk_3",
+        using: "BTREE",
+        fields: [
+          { name: "materialUsedAsTarget_id" },
         ]
       },
     ]

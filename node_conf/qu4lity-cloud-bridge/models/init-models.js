@@ -10,7 +10,7 @@ var _Material_Material = require("./Material_Material");
 var _Material_Measure = require("./Material_Measure");
 var _Material_Property = require("./Material_Property");
 var _Measure = require("./Measure");
-var _MeasureKO = require("./MeasureKO");
+var _MeasureResult = require("./MeasureResult");
 var _MeasureValues = require("./MeasureValues");
 var _Operation = require("./Operation");
 var _OperationFailure = require("./OperationFailure");
@@ -40,7 +40,7 @@ function initModels(sequelize) {
   var Material_Measure = _Material_Measure(sequelize, DataTypes);
   var Material_Property = _Material_Property(sequelize, DataTypes);
   var Measure = _Measure(sequelize, DataTypes);
-  var MeasureKO = _MeasureKO(sequelize, DataTypes);
+  var MeasureResult = _MeasureResult(sequelize, DataTypes);
   var MeasureValues = _MeasureValues(sequelize, DataTypes);
   var Operation = _Operation(sequelize, DataTypes);
   var OperationFailure = _OperationFailure(sequelize, DataTypes);
@@ -72,6 +72,10 @@ function initModels(sequelize) {
   Resource.belongsToMany(Measure, { through: Resource_Measure, foreignKey: "resource_id", otherKey: "measure_id", as: "Measure" });
   Function.belongsTo(Resource, { foreignKey: "resource_id"});
   Resource.hasMany(Function, { foreignKey: "resource_id"});
+  Function.belongsTo(Material, { foreignKey: "materialUsedAsCarrier_id"});
+  Material.hasMany(Function, { foreignKey: "materialUsedAsCarrier_id"});
+  Function.belongsTo(Material, { foreignKey: "materialUsedAsTarget_id"});
+  Material.hasMany(Function, { foreignKey: "materialUsedAsTarget_id"});
   Function_Measure.belongsTo(Function, { foreignKey: "function_id"});
   Function.hasMany(Function_Measure, { foreignKey: "function_id"});
   Function_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
@@ -98,16 +102,14 @@ function initModels(sequelize) {
   Material.hasMany(Material_Property, { foreignKey: "material_id"});
   Material_Property.belongsTo(Property, { foreignKey: "property_id"});
   Property.hasMany(Material_Property, { foreignKey: "property_id"});
-  MeasureKO.belongsTo(Measure, { foreignKey: "measure_id"});
-  Measure.hasMany(MeasureKO, { foreignKey: "measure_id"});
-  MeasureKO.belongsTo(FailureType, { foreignKey: "failureType_id"});
-  FailureType.hasMany(MeasureKO, { foreignKey: "failureType_id"});
-  MeasureKO.belongsTo(Product, { foreignKey: "product_id"});
-  Product.hasMany(MeasureKO, { foreignKey: "product_id"});
+  MeasureResult.belongsTo(Measure, { foreignKey: "measure_id"});
+  Measure.hasMany(MeasureResult, { foreignKey: "measure_id"});
+  MeasureResult.belongsTo(FailureType, { foreignKey: "failureType_id"});
+  FailureType.hasMany(MeasureResult, { foreignKey: "failureType_id"});
+  MeasureResult.belongsTo(Product, { foreignKey: "product_id"});
+  Product.hasMany(MeasureResult, { foreignKey: "product_id"});
   MeasureValues.belongsTo(Measure, { foreignKey: "measure_id"});
   Measure.hasMany(MeasureValues, { foreignKey: "measure_id"});
-  Operation.belongsTo(Product, { foreignKey: "product_id"});
-  Product.hasMany(Operation, { foreignKey: "product_id"});
   Operation.belongsTo(OperationType, { foreignKey: "operationType_id"});
   OperationType.hasMany(Operation, { foreignKey: "operationType_id"});
   Operation.belongsTo(Material, { foreignKey: "materialUsedAsCarrier_id"});
@@ -159,7 +161,7 @@ function initModels(sequelize) {
     Material_Measure,
     Material_Property,
     Measure,
-    MeasureKO,
+    MeasureResult,
     MeasureValues,
     Operation,
     OperationFailure,

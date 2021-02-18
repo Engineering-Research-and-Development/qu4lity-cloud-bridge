@@ -11,12 +11,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Setup',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

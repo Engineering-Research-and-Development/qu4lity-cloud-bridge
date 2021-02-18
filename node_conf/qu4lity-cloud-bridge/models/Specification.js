@@ -44,7 +44,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'Specification',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

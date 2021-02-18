@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     occuranceDate: {
-      type: DataTypes.DATE(6),
+      type: DataTypes.DATE,
       allowNull: false
     },
     description: {
@@ -40,7 +40,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'ResourceFailure',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     productionOrder_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       references: {
         model: 'ProductionOrder',
@@ -18,21 +18,20 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     industrialModel_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
     commercialModel_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
-    descriptionModel_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    descriptionModel: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Product',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

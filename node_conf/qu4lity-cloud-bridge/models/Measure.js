@@ -22,13 +22,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     dateTime: {
-      type: DataTypes.DATE(6),
+      type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
     tableName: 'Measure',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

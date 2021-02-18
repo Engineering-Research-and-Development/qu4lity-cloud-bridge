@@ -17,18 +17,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    dateTime: {
-      type: DataTypes.DATE(6),
-      allowNull: false
-    },
-    product_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: 'Product',
-        key: 'product_id'
-      }
-    },
     operationType_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -72,7 +60,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'Operation',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {
@@ -87,39 +74,32 @@ module.exports = function(sequelize, DataTypes) {
         name: "operation_fk_1",
         using: "BTREE",
         fields: [
-          { name: "product_id" },
+          { name: "operationType_id" },
         ]
       },
       {
         name: "operation_fk_2",
         using: "BTREE",
         fields: [
-          { name: "operationType_id" },
+          { name: "materialUsedAsCarrier_id" },
         ]
       },
       {
         name: "operation_fk_3",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsCarrier_id" },
+          { name: "materialUsedAsTarget_id" },
         ]
       },
       {
         name: "operation_fk_4",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsTarget_id" },
-        ]
-      },
-      {
-        name: "operation_fk_5",
-        using: "BTREE",
-        fields: [
           { name: "materialTransformation_id" },
         ]
       },
       {
-        name: "operation_fk_6",
+        name: "operation_fk_5",
         using: "BTREE",
         fields: [
           { name: "resource_id" },

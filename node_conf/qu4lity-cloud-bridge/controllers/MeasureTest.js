@@ -2,29 +2,18 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const models = require("../models").models
 
-let needsDecoding = ["vRMSfreqPump",
-                      "aRMSfreqPUMP",
-                      "aPeaktimePUMP",
-                      "unbalance",
-                      "misalignment",
-                      "BearingPUMPnt",
-                      "BearingPUMPdi",
-                      "BearingMotor6",
-                      "PumpPiston",
-                      "PressureSensor1",
-                      "PressureSensor2",
-                      "PressureSensor3",
-                      "PressureSensor4"
-                      ]
-
 // Retrieve all Measures from the database.
 exports.findAll = (req, res) => {
+    var measureResult = req.body.measureResult
     const from = req.body.from;
     const to = req.body.to;
     const limit = req.body.limit;
     var offset = req.body.offset;
     
+  
     var condition = {}
+    if(!measureResult)
+      measureResult="%"
     if(from && to)
       condition["dateTime"] =  { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
     else if(from)
@@ -38,8 +27,8 @@ exports.findAll = (req, res) => {
     models.Measure.findAll({
       include:[
         { model: models.MeasureValues, as: 'MeasureValues' },
-        //{ model: models.MeasureKO, as: 'MeasureKO' },
-        { model: models.Specification, as: 'Specifications', where: { type: { [Op.notIn] : needsDecoding } } }
+        { model: models.Specification, as: 'Specifications'},
+        { model: models.MeasureResult, as: 'MeasureResults', where: { description: { [Op.like] : measureResult } } }
       ],
       where: condition,
       order: [['dateTime','DESC']],
@@ -50,7 +39,7 @@ exports.findAll = (req, res) => {
       var data = []
       rows.forEach(rowObject => {
         var row = rowObject.dataValues
-       
+
         var json = {};
         json["measure_id"] = row.measure_id;
         json["dateTime"] = row.dateTime;
@@ -61,6 +50,7 @@ exports.findAll = (req, res) => {
         json["specUsl"] = row.Specifications[0].usl;
         json["specLsl"] = row.Specifications[0].lsl;
         json["value"] = row.MeasureValues[0].m_values;
+        json["result"] = row.MeasureResults[0].description;
 
         data.push(json);
       });

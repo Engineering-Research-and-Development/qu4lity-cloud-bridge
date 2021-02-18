@@ -2,8 +2,8 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('MeasureKO', {
-    measureKO_id: {
+  return sequelize.define('MeasureResult', {
+    measureResult_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     failureType_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'FailureType',
         key: 'failureType_id'
@@ -34,12 +34,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     dateTime: {
-      type: DataTypes.DATE(6),
+      type: DataTypes.DATE,
       allowNull: false
     },
     recoveryTime: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
@@ -47,8 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'MeasureKO',
-    schema: 'whr_mpfq_relational',
+    tableName: 'MeasureResult',
     timestamps: false,
     indexes: [
       {
@@ -56,25 +55,25 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "measureKO_id" },
+          { name: "measureResult_id" },
         ]
       },
       {
-        name: "measureKO_fk_1",
+        name: "measureResult_fk_1",
         using: "BTREE",
         fields: [
           { name: "measure_id" },
         ]
       },
       {
-        name: "measureKO_fk_2",
+        name: "measureResult_fk_2",
         using: "BTREE",
         fields: [
           { name: "failureType_id" },
         ]
       },
       {
-        name: "measureKO_fk_3",
+        name: "measureResult_fk_3",
         using: "BTREE",
         fields: [
           { name: "product_id" },

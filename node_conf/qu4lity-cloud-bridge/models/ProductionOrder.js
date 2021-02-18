@@ -5,33 +5,36 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ProductionOrder', {
     productionOrder_id: {
       autoIncrement: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
     },
     industrialModel_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
     commercialModel_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
-    descriptionModel_id: {
-      type: DataTypes.INTEGER,
+    descriptionModel: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     startDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.fn('current_timestamp')
     },
     earliestDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: "0000-00-00 00:00:00"
     },
     dueDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: "0000-00-00 00:00:00"
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -47,8 +50,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     productionLine_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
+      allowNull: true,
       references: {
         model: 'ProductionLine',
         key: 'productionLine_id'
@@ -57,7 +59,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'ProductionOrder',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

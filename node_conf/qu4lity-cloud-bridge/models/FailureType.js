@@ -28,7 +28,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'FailureType',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

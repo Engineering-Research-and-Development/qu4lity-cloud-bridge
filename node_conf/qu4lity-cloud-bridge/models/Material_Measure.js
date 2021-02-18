@@ -24,7 +24,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'Material_Measure',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

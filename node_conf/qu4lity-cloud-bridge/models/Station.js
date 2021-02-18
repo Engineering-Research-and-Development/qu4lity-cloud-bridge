@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     operationType_id: {
       type: DataTypes.INTEGER,
@@ -19,8 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     productionLine_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
+      allowNull: true,
       references: {
         model: 'ProductionLine',
         key: 'productionLine_id'
@@ -28,16 +27,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     system: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     machinery_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Station',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {

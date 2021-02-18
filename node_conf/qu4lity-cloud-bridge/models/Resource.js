@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     setup_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -19,20 +23,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     location: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     type: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     state: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'Resource',
-    schema: 'whr_mpfq_relational',
     timestamps: false,
     indexes: [
       {
