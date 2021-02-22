@@ -36,7 +36,7 @@
 					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2019-08-19 10:05:00\",\r\n    \"decoded\":\"false\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/1.0/measureSensors",
+					"raw": "http://localhost:8080/mpfq/api/1.0/measureSensors",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -129,7 +129,7 @@
 					"raw": "{\r\n    \"from\":\"2020-01-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100,\r\n    \"measureResult\":\"KO\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/1.0/measureTests",
+					"raw": "http://localhost:8080/mpfq/api/1.0/measureTests",
 					"protocol": "http",
 					"host": [
 						"localhost"
