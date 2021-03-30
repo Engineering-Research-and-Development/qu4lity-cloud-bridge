@@ -9,17 +9,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    resource_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Resource',
-        key: 'resource_id'
-      }
-    },
     failureType_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'FailureType',
         key: 'failureType_id'
@@ -27,11 +19,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     recoveryTime: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     occuranceDate: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.DATE(3),
+      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
@@ -51,14 +43,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "operationFailure_fk_1",
-        using: "BTREE",
-        fields: [
-          { name: "resource_id" },
-        ]
-      },
-      {
-        name: "operationFailure_fk_2",
+        name: "operationFailure_fk",
         using: "BTREE",
         fields: [
           { name: "failureType_id" },

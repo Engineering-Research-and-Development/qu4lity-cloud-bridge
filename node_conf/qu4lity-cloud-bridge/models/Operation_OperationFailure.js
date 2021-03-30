@@ -2,28 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('MeasureValues', {
-    values_id: {
-      autoIncrement: true,
+  return sequelize.define('Operation_OperationFailure', {
+    operation_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
-    },
-    measure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Operation',
+        key: 'operation_id'
       }
     },
-    m_values: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    operationFailure_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'OperationFailure',
+        key: 'operationFailure_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'MeasureValues',
+    tableName: 'Operation_OperationFailure',
     timestamps: false,
     indexes: [
       {
@@ -31,14 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "values_id" },
+          { name: "operation_id" },
+          { name: "operationFailure_id" },
         ]
       },
       {
-        name: "values_fk",
+        name: "operation_operationFailure_fk_2",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "operationFailure_id" },
         ]
       },
     ]

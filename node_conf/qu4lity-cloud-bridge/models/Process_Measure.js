@@ -2,28 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Material_Material', {
-    material_id: {
-      type: DataTypes.BIGINT,
+  return sequelize.define('Process_Measure', {
+    process_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'Process',
+        key: 'process_id'
       }
     },
-    subMaterial_id: {
-      type: DataTypes.BIGINT,
+    measure_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'Measure',
+        key: 'measure_id'
       }
     }
   }, {
     sequelize,
-    tableName: 'Material_Material',
+    tableName: 'Process_Measure',
     timestamps: false,
     indexes: [
       {
@@ -31,15 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "material_id" },
-          { name: "subMaterial_id" },
+          { name: "process_id" },
+          { name: "measure_id" },
         ]
       },
       {
-        name: "materialComposition_fk_2",
+        name: "Process_measure_fk_2",
         using: "BTREE",
         fields: [
-          { name: "subMaterial_id" },
+          { name: "measure_id" },
         ]
       },
     ]

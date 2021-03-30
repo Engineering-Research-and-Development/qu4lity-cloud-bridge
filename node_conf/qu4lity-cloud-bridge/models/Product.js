@@ -17,13 +17,21 @@ module.exports = function(sequelize, DataTypes) {
         key: 'productionOrder_id'
       }
     },
+    engineeringBoM_id: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      references: {
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
+      }
+    },
     industrialModel_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: true
     },
     commercialModel_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: true
     },
     descriptionModel: {
       type: DataTypes.TEXT,
@@ -47,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "productionOrder_id" },
+        ]
+      },
+      {
+        name: "product_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "engineeringBoM_id" },
         ]
       },
     ]

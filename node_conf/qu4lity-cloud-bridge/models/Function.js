@@ -9,20 +9,24 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    resource_id: {
+    process_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'Resource',
-        key: 'resource_id'
+        model: 'Process',
+        key: 'process_id'
       }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     materialUsedAsCarrier_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
       }
     },
     carrier: {
@@ -33,21 +37,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    materialUsedAsTarget_id: {
+    materialUsedAsObject_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
       }
     },
     object: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
     }
   }, {
     sequelize,
@@ -66,7 +66,7 @@ module.exports = function(sequelize, DataTypes) {
         name: "function_fk_1",
         using: "BTREE",
         fields: [
-          { name: "resource_id" },
+          { name: "process_id" },
         ]
       },
       {
@@ -80,7 +80,7 @@ module.exports = function(sequelize, DataTypes) {
         name: "function_fk_3",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsTarget_id" },
+          { name: "materialUsedAsObject_id" },
         ]
       },
     ]

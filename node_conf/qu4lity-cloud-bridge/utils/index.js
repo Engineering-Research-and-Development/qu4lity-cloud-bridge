@@ -55,6 +55,10 @@ module.exports = {
 
         json["values"] = data;
 
-        return json;
+        var ret = {
+            dataSeriesValue : json
+        }
+
+        return ret;
     }
 };

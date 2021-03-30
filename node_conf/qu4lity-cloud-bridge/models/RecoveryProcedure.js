@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "recoveryProcedure_fk_1",
+        name: "recoveryProcedure_fk",
         using: "BTREE",
         fields: [
           { name: "failureType_id" },

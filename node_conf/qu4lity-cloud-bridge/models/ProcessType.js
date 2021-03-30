@@ -2,8 +2,8 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('OperationType', {
-    operationType_id: {
+  return sequelize.define('ProcessType', {
+    processType_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'OperationType',
+    tableName: 'ProcessType',
     timestamps: false,
     indexes: [
       {
@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "operationType_id" },
+          { name: "processType_id" },
         ]
       },
     ]

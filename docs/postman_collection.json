@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "measureSensorsEncoded",
+			"name": "Fetch Drum_Sensor_Encoded",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -33,56 +33,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2019-08-19 10:05:00\",\r\n    \"decoded\":\"false\"\r\n}"
+					"raw": "{\r\n    \"measureSpecification\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": false\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/1.0/measureSensors",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9000",
-					"path": [
-						"api",
-						"1.0",
-						"measureSensors"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "measureSensorsDecoded",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "qu4lity!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "exampleuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\":\"2020-02-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100,\r\n    \"decoded\":\"true\"\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/measureSensors",
+					"raw": "http://localhost:8080/mpfq/api/1.0/drum/sensor/fetch/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -92,14 +46,17 @@
 						"mpfq",
 						"api",
 						"1.0",
-						"measureSensors"
+						"drum",
+						"sensor",
+						"fetch",
+						"all"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "measureTests",
+			"name": "Fetch Drum_Sensor_Decoded",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -126,56 +83,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from\":\"2020-01-14 10:32:07\",\r\n    \"to\":\"2020-02-14 17:32:07\",\r\n    \"limit\":100,\r\n    \"measureResult\":\"KO\"\r\n}"
+					"raw": "{\r\n    \"measureSpecification\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": true\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/api/1.0/measureTests",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9000",
-					"path": [
-						"api",
-						"1.0",
-						"measureTests"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "stations",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "qu4lity!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "exampleuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/stations",
+					"raw": "http://localhost:8080/mpfq/api/1.0/drum/sensor/fetch/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -185,14 +96,17 @@
 						"mpfq",
 						"api",
 						"1.0",
-						"stations"
+						"drum",
+						"sensor",
+						"fetch",
+						"all"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "functions",
+			"name": "Fetch Drum_Test",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -219,10 +133,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n}"
+					"raw": "{\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2019-08-19 10:02:00\",\r\n    \"limit\":100\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/functions",
+					"raw": "http://localhost:8080/mpfq/api/1.0/drum/test/fetch/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -232,14 +146,61 @@
 						"mpfq",
 						"api",
 						"1.0",
-						"functions"
+						"drum",
+						"test",
+						"fetch",
+						"all"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "productionLines",
+			"name": "List EngineeringBoM",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/engineeringBom/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"engineeringBom",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchEngineeringBoM",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -266,10 +227,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n}"
+					"raw": "{\r\n    \"engineeringBoM_id\":40001010000,\r\n    \"material_id\":400011163660\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/productionLines",
+					"raw": "http://localhost:8080/mpfq/api/1.0/engineeringBom/fetch/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -279,7 +240,283 @@
 						"mpfq",
 						"api",
 						"1.0",
-						"productionLines"
+						"engineeringBom",
+						"fetch",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Functions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/function/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"function",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Functions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"function\": \"drive\",\r\n    \"materialUsedAsObject_id\": 40001060005\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/function/fetch/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"function",
+						"fetch",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List ProductionLines",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/productionLine/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"productionLine",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Materials",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/material/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"material",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Stations",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/station/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"station",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Stations",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"machinery_id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/station/fetch/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"station",
+						"fetch",
+						"all"
 					]
 				}
 			},

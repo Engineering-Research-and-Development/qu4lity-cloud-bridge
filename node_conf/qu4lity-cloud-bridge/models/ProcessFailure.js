@@ -2,48 +2,44 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Specification', {
-    specification_id: {
+  return sequelize.define('ProcessFailure', {
+    processFailure_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
+    process_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'Process',
+        key: 'process_id'
       }
     },
-    dataSeriesUSL: {
-      type: DataTypes.TEXT,
+    failureType_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'FailureType',
+        key: 'failureType_id'
+      }
+    },
+    recoveryTime: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
-    dataSeriesLSL: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    usl: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    lsl: {
-      type: DataTypes.TEXT,
+    occuranceDate: {
+      type: DataTypes.DATE(3),
       allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: true
-    },
-    type: {
-      type: DataTypes.TEXT,
-      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'Specification',
+    tableName: 'ProcessFailure',
     timestamps: false,
     indexes: [
       {
@@ -51,14 +47,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "specification_id" },
+          { name: "processFailure_id" },
         ]
       },
       {
-        name: "specification_fk",
+        name: "ProcessFailure_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "process_id" },
+        ]
+      },
+      {
+        name: "ProcessFailure_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "failureType_id" },
         ]
       },
     ]

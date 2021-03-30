@@ -2,44 +2,44 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('MeasureResult', {
-    measureResult_id: {
+  return sequelize.define('Process', {
+    process_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    measure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Measure',
-        key: 'measure_id'
-      }
-    },
-    failureType_id: {
+    location_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'FailureType',
-        key: 'failureType_id'
+        model: 'Location',
+        key: 'location_id'
       }
     },
-    product_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: 'Product',
-        key: 'product_id'
-      }
-    },
-    dateTime: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    recoveryTime: {
+    state_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'State',
+        key: 'state_id'
+      }
+    },
+    operation_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Operation',
+        key: 'operation_id'
+      }
+    },
+    processType_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ProcessType',
+        key: 'processType_id'
+      }
     },
     description: {
       type: DataTypes.TEXT,
@@ -47,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'MeasureResult',
+    tableName: 'Process',
     timestamps: false,
     indexes: [
       {
@@ -55,28 +55,35 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "measureResult_id" },
+          { name: "process_id" },
         ]
       },
       {
-        name: "measureResult_fk_1",
+        name: "process_fk_1",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "location_id" },
         ]
       },
       {
-        name: "measureResult_fk_2",
+        name: "process_fk_2",
         using: "BTREE",
         fields: [
-          { name: "failureType_id" },
+          { name: "state_id" },
         ]
       },
       {
-        name: "measureResult_fk_3",
+        name: "process_fk_3",
         using: "BTREE",
         fields: [
-          { name: "product_id" },
+          { name: "operation_id" },
+        ]
+      },
+      {
+        name: "process_fk_4",
+        using: "BTREE",
+        fields: [
+          { name: "processType_id" },
         ]
       },
     ]

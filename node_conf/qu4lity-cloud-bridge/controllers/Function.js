@@ -3,30 +3,41 @@ const Op = Sequelize.Op;
 const models = require("../models").models
 
 // Retrieve all Functions from the database.
+exports.listAll = (req, res) => {
+  const type = req.body.function;
+  const carrier = req.body.materialUsedAsCarried_id;
+  const object = req.body.materialUsedAsObject_id;
+
+  var condition = {}
+
+  if(type)
+    condition["function"] =  { [Op.eq]: `${type}` }
+  if(carrier)
+    condition["materialUsedAsCarrier_id"] =  { [Op.eq]: `${carrier}` }
+  if(object)
+    condition["materialUsedAsObject_id"] =  { [Op.eq]: `${object}` }
+
+  models.Function.findAll({
+    where: condition,
+    order: [['function_id','ASC']]
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while retrieving measures."
+      });
+  });
+};
+
+// Retrieve all Functions from the database.
 exports.findAll = (req, res) => {
-    const type = req.body.type;
-
-    var condition = {}
-    if(type)
-        condition["type"] =  { [Op.eq]: `${type}` }
-
     models.Function.findAll({
-      include:[],
-      where: condition,
       order: [['function_id','ASC']]
     })
-    .then(rows => {
-      var data = []
-      rows.forEach(rowObject => {
-        var row = rowObject.dataValues
-        var json = {};
-        json["function_id"] = row.function_id;
-        json["type"] = row.type;
-        json["carrier"] = row.carrier;
-        json["object"] = row.object;
-       
-        data.push(json);
-      });
+    .then(data => {
       res.send(data);
     })
     .catch(err => {

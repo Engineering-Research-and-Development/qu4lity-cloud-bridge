@@ -15,19 +15,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     duration: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
-    operationType_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'OperationType',
-        key: 'operationType_id'
-      }
+    note: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     materialUsedAsCarrier_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'Material',
         key: 'material_id'
@@ -35,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     materialUsedAsTarget_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'Material',
         key: 'material_id'
@@ -43,18 +39,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     materialTransformation_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'Material',
         key: 'material_id'
-      }
-    },
-    resource_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Resource',
-        key: 'resource_id'
       }
     }
   }, {
@@ -74,35 +62,21 @@ module.exports = function(sequelize, DataTypes) {
         name: "operation_fk_1",
         using: "BTREE",
         fields: [
-          { name: "operationType_id" },
+          { name: "materialUsedAsCarrier_id" },
         ]
       },
       {
         name: "operation_fk_2",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsCarrier_id" },
+          { name: "materialUsedAsTarget_id" },
         ]
       },
       {
         name: "operation_fk_3",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsTarget_id" },
-        ]
-      },
-      {
-        name: "operation_fk_4",
-        using: "BTREE",
-        fields: [
           { name: "materialTransformation_id" },
-        ]
-      },
-      {
-        name: "operation_fk_5",
-        using: "BTREE",
-        fields: [
-          { name: "resource_id" },
         ]
       },
     ]

@@ -1,6 +1,6 @@
 {
   "name": "qu4lity-cloud-bridge",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "QU4LITY Cloud Bridge, a REST service to glose the gap between legacy systems and QU4LITY Infrastructure",
   "main": "index.js",
   "scripts": {

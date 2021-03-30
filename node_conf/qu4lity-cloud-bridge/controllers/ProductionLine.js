@@ -4,10 +4,8 @@ const models = require("../models").models
 
 // Retrieve all ProductionLines from the database.
 exports.findAll = (req, res) => {
-    var condition = {}
-
-    models.ProductionLine.findAll({
-        where: condition,
+   
+  models.ProductionLine.findAll({
         order: [['productionLine_id','ASC']]
     })
     .then(rows => {
