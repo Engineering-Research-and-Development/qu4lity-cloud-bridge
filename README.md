@@ -33,142 +33,142 @@ docker-compose up
     </thead>
     <tbody>
 
-        <tr>
-            <td>POST</td>
-            <td>/drum/sensor/fetch/one</td>
-            <td>Returns given drum sensor measure by passing <a>measure_id</a> as body parameter</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/drum/sensor/fetch/all</td>
-            <td>Returns all drum sensor measures. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>measureSpecification</a>: String - MANDATORY</li>
-                    <li><a>from</a>: Date</li>
-                    <li><a>to</a>: Date</li>
-                    <li><a>limit</a>: Int</li>
-                    <li><a>offset</a>: Int</li>
-                    <li><a>decoded</a>: Bool</li>
-                </ul>
-            </td>
-        </tr>
+      <tr>
+          <td>POST</td>
+          <td>/drum/sensor/fetch/one</td>
+          <td>Returns given drum sensor measure by passing <a>measure_id</a> as body parameter</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/drum/sensor/fetch/all</td>
+          <td>Returns all drum sensor measures. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>measureSpecification</a>: String - MANDATORY</li>
+                  <li><a>from</a>: Date</li>
+                  <li><a>to</a>: Date</li>
+                  <li><a>limit</a>: Int</li>
+                  <li><a>offset</a>: Int</li>
+                  <li><a>decoded</a>: Bool</li>
+              </ul>
+          </td>
+      </tr>
 
-        <tr>
-            <td>POST</td>
-            <td>/drum/test/fetch/one</td>
-            <td>Returns given drum test measure by passing <a>measure_id</a> as body parameter</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/drum/test/fetch/all</td>
-            <td>Returns all drum test measures. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>from</a>: Date</li>
-                    <li><a>to</a>: Date</li>
-                    <li><a>limit</a>: Int</li>
-                    <li><a>offset</a>: Int</li>
-                </ul>
-            </td>
-        </tr>
+      <tr>
+          <td>POST</td>
+          <td>/drum/test/fetch/one</td>
+          <td>Returns given drum test measure by passing <a>measure_id</a> as body parameter</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/drum/test/fetch/all</td>
+          <td>Returns all drum test measures. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>from</a>: Date</li>
+                  <li><a>to</a>: Date</li>
+                  <li><a>limit</a>: Int</li>
+                  <li><a>offset</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
 
-        <tr>
-            <td>GET</td>
-            <td>/engineeringBoM/list</td>
-            <td>Returns all engineeringBoMs</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/engineeringBoM/fetch/one</td>
-            <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>engineeringBoM_id</a>: Int</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/engineeringBoM/fetch/all</td>
-            <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>engineeringBoM_id</a>: Int</li>
-                    <li><a>material_id</a>: Int</li>
-                </ul>
-            </td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/engineeringBoM/list</td>
+          <td>Returns all engineeringBoMs</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/engineeringBoM/fetch/one</td>
+          <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>engineeringBoM_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/engineeringBoM/fetch/all</td>
+          <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>engineeringBoM_id</a>: Int</li>
+                  <li><a>material_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
 
-        <tr>
-            <td>GET</td>
-            <td>/function/list</td>
-            <td>Returns all functions</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/function/fetch/one</td>
-            <td>Returns a function by passing <a>function_id</a> as body parameter</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/function/fetch/all</td>
-            <td>Returns a subset of all functions. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>type</a>: String</li>
-                </ul>
-            </td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/function/list</td>
+          <td>Returns all functions</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/function/fetch/one</td>
+          <td>Returns a function by passing <a>function_id</a> as body parameter</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/function/fetch/all</td>
+          <td>Returns a subset of all functions. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>type</a>: String</li>
+              </ul>
+          </td>
+      </tr>
 
-        <tr>
-            <td>GET</td>
-            <td>/material/list</td>
-            <td>Returns all materials</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/material/fetch/one</td>
-            <td>Returns a material by passing <a>material_id</a> as body parameter</td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/material/list</td>
+          <td>Returns all materials</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/material/fetch/one</td>
+          <td>Returns a material by passing <a>material_id</a> as body parameter</td>
+      </tr>
 
-        <tr>
-            <td>GET</td>
-            <td>/process/list</td>
-            <td>Returns all processes</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/process/fetch/one</td>
-            <td>Returns given process by passing <a>process_id</a> as body parameter</td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/process/list</td>
+          <td>Returns all processes</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/process/fetch/one</td>
+          <td>Returns given process by passing <a>process_id</a> as body parameter</td>
+      </tr>
 
-        <tr>
-            <td>GET</td>
-            <td>/productionLine/list</td>
-            <td>Returns all productionLines</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/productionLine/fetch/one</td>
-            <td>Returns given productionLine by passing <a>productionLine_id</a> as body parameter</td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/productionLine/list</td>
+          <td>Returns all productionLines</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/productionLine/fetch/one</td>
+          <td>Returns given productionLine by passing <a>productionLine_id</a> as body parameter</td>
+      </tr>
 
 
-        <tr>
-            <td>GET</td>
-            <td>/station/list</td>
-            <td>Returns all stations</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/station/fetch/one</td>
-            <td>Returns given station by passing <a>station_id</a> as body parameter</td>
-        </tr>
-        <tr>
-            <td>POST</td>
-            <td>/station/fetch/all</td>
-            <td>Returns a subset of all stations. You can pass the followings as body parameter:
-                <ul>
-                    <li><a>machinery_id</a>: Int</li>
-                </ul>
-            </td>
-        </tr>
+      <tr>
+          <td>GET</td>
+          <td>/station/list</td>
+          <td>Returns all stations</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/station/fetch/one</td>
+          <td>Returns given station by passing <a>station_id</a> as body parameter</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/station/fetch/all</td>
+          <td>Returns a subset of all stations. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>machinery_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
 
     </tbody>
 </table>
