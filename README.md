@@ -32,7 +32,6 @@ docker-compose up
         </tr>
     </thead>
     <tbody>
-
       <tr>
           <td>POST</td>
           <td>/drum/sensor/fetch/one</td>
@@ -52,7 +51,6 @@ docker-compose up
               </ul>
           </td>
       </tr>
-
       <tr>
           <td>POST</td>
           <td>/drum/test/fetch/one</td>
@@ -70,7 +68,6 @@ docker-compose up
               </ul>
           </td>
       </tr>
-
       <tr>
           <td>GET</td>
           <td>/engineeringBoM/list</td>
@@ -95,7 +92,6 @@ docker-compose up
               </ul>
           </td>
       </tr>
-
       <tr>
           <td>GET</td>
           <td>/function/list</td>
@@ -115,7 +111,6 @@ docker-compose up
               </ul>
           </td>
       </tr>
-
       <tr>
           <td>GET</td>
           <td>/material/list</td>
@@ -126,7 +121,6 @@ docker-compose up
           <td>/material/fetch/one</td>
           <td>Returns a material by passing <a>material_id</a> as body parameter</td>
       </tr>
-
       <tr>
           <td>GET</td>
           <td>/process/list</td>
@@ -137,7 +131,6 @@ docker-compose up
           <td>/process/fetch/one</td>
           <td>Returns given process by passing <a>process_id</a> as body parameter</td>
       </tr>
-
       <tr>
           <td>GET</td>
           <td>/productionLine/list</td>
@@ -148,8 +141,6 @@ docker-compose up
           <td>/productionLine/fetch/one</td>
           <td>Returns given productionLine by passing <a>productionLine_id</a> as body parameter</td>
       </tr>
-
-
       <tr>
           <td>GET</td>
           <td>/station/list</td>
@@ -169,7 +160,6 @@ docker-compose up
               </ul>
           </td>
       </tr>
-
     </tbody>
 </table>
 
