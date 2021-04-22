@@ -36,26 +36,27 @@ exports.filterOne = (req, res) => {
 
 
 exports.filterAll = (req, res) => {
-  const measureSpecification = req.body.measureSpecification;
+  const type = req.body.type;
   const from = req.body.from;
   const to = req.body.to;
   const limit = req.body.limit;
   var offset = req.body.offset;
   const toBeDecoded = req.body.decoded;
 
-  if (!measureSpecification)
-    throw "Missing 'measureSpecification' parameter"
-
   var condition = {}
+
+  if (!type)
+    throw "Missing 'type' parameter"
+  else{  
+    condition["description"] = { [Op.like]: `DRUM Hydraulic Punching SeriesMeasure ${type}%` }
+  }
+
   if (from && to)
     condition["dateTime"] = { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
   else if (from)
     condition["dateTime"] = { [Op.gte]: `${from}` }
   else if (to)
     condition["dateTime"] = { [Op.lte]: `${to}` }
-
-  if (measureSpecification)
-    condition["MeasureSpecification"] = { [Op.eq]: `${measureSpecification}` }
 
   if (!offset)
     offset = 0
@@ -74,14 +75,14 @@ exports.filterAll = (req, res) => {
         var json = {};
         json["measure_id"] = row.measure_id;
         json["description"] = row.description;
-        json["measureSpecification"] = row.measureSpecification;
+        json["sensorType"] = type;
         json["measureDimension"] = row.measureDimension;
         json["measureType"] = row.measureType;
         json["dateTime"] = row.dateTime;
         json["dataSeriesUSL"] = row.dataSeriesUSL;
         json["dataSeriesLSL"] = row.dataSeriesLSL;
 
-        if (toBeDecoded != null && toBeDecoded == true && needsDecoding.indexOf(row.measureSpecification) > -1) {
+        if (toBeDecoded != null && toBeDecoded == true && needsDecoding.indexOf(type) > -1) {
           var extracted = utils.iee754Extractor(row.dataSeriesValue);
           Object.assign(json, extracted);
         } else {

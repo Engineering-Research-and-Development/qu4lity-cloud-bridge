@@ -26,6 +26,12 @@ var _ProductionLine = require("./ProductionLine");
 var _ProductionOrder = require("./ProductionOrder");
 var _Property = require("./Property");
 var _RecoveryProcedure = require("./RecoveryProcedure");
+var _Resource = require("./Resource");
+var _ResourceFailure = require("./ResourceFailure");
+var _ResourceSetup = require("./ResourceSetup");
+var _ResourceType = require("./ResourceType");
+var _Resource_Measure = require("./Resource_Measure");
+var _Resource_ResourceFailure = require("./Resource_ResourceFailure");
 var _State = require("./State");
 var _Station = require("./Station");
 
@@ -57,6 +63,12 @@ function initModels(sequelize) {
   var ProductionOrder = _ProductionOrder(sequelize, DataTypes);
   var Property = _Property(sequelize, DataTypes);
   var RecoveryProcedure = _RecoveryProcedure(sequelize, DataTypes);
+  var Resource = _Resource(sequelize, DataTypes);
+  var ResourceFailure = _ResourceFailure(sequelize, DataTypes);
+  var ResourceSetup = _ResourceSetup(sequelize, DataTypes);
+  var ResourceType = _ResourceType(sequelize, DataTypes);
+  var Resource_Measure = _Resource_Measure(sequelize, DataTypes);
+  var Resource_ResourceFailure = _Resource_ResourceFailure(sequelize, DataTypes);
   var State = _State(sequelize, DataTypes);
   var Station = _Station(sequelize, DataTypes);
 
@@ -74,6 +86,10 @@ function initModels(sequelize) {
   Process.belongsToMany(Measure, { through: Process_Measure, foreignKey: "process_id", otherKey: "measure_id" });
   Material.belongsToMany(Product, { through: Product_Material, foreignKey: "material_id", otherKey: "product_id" });
   Product.belongsToMany(Material, { through: Product_Material, foreignKey: "product_id", otherKey: "material_id" });
+  Measure.belongsTo(Resource, { through: Resource_Measure, foreignKey: "measure_id", otherKey: "resource_id" });
+  Resource.belongsToMany(Measure, { through: Resource_Measure, foreignKey: "resource_id", otherKey: "measure_id" });
+  ResourceFailure.belongsToMany(Resource, { through: Resource_ResourceFailure, foreignKey: "resourceFailure_id", otherKey: "resource_id" });
+  Resource.belongsToMany(ResourceFailure, { through: Resource_ResourceFailure, foreignKey: "resource_id", otherKey: "resourceFailure_id" });
   EngineeringBoM_Material.belongsTo(EngineeringBoM, { foreignKey: "engineeringBoM_id"});
   EngineeringBoM.hasMany(EngineeringBoM_Material, { foreignKey: "engineeringBoM_id"});
   EngineeringBoM_Material.belongsTo(Material, { foreignKey: "material_id"});
@@ -90,8 +106,6 @@ function initModels(sequelize) {
   Measure.hasMany(Function_Measure, { foreignKey: "measure_id"});
   Journal.belongsTo(ProductionOrder, { foreignKey: "productionOrder_id"});
   ProductionOrder.hasMany(Journal, { foreignKey: "productionOrder_id"});
-  Journal.belongsTo(ProductionLine, { foreignKey: "productionLine_id"});
-  ProductionLine.hasMany(Journal, { foreignKey: "productionLine_id"});
   JournalDetails.belongsTo(Journal, { foreignKey: "journal_id"});
   Journal.hasMany(JournalDetails, { foreignKey: "journal_id"});
   JournalDetails.belongsTo(Station, { foreignKey: "station_id"});
@@ -107,7 +121,7 @@ function initModels(sequelize) {
   Material_Property.belongsTo(Property, { foreignKey: "property_id"});
   Property.hasMany(Material_Property, { foreignKey: "property_id"});
   MeasureFailure.belongsTo(Measure, { foreignKey: "measure_id"});
-  Measure.hasMany(MeasureFailure, { foreignKey: "measure_id"});
+  Measure.hasOne(MeasureFailure, { foreignKey: "measure_id"});
   MeasureFailure.belongsTo(FailureType, { foreignKey: "failureType_id"});
   FailureType.hasMany(MeasureFailure, { foreignKey: "failureType_id"});
   Operation.belongsTo(Material, { foreignKey: "materialUsedAsCarrier_id"});
@@ -128,6 +142,8 @@ function initModels(sequelize) {
   State.hasMany(Process, { foreignKey: "state_id"});
   Process.belongsTo(Operation, { foreignKey: "operation_id"});
   Operation.hasMany(Process, { foreignKey: "operation_id"});
+  Process.belongsTo(Resource, { foreignKey: "resource_id"});
+  Resource.hasMany(Process, { foreignKey: "resource_id"});
   Process.belongsTo(ProcessType, { foreignKey: "processType_id"});
   ProcessType.hasMany(Process, { foreignKey: "processType_id"});
   ProcessFailure.belongsTo(Process, { foreignKey: "process_id"});
@@ -150,6 +166,20 @@ function initModels(sequelize) {
   ProductionLine.hasMany(ProductionOrder, { foreignKey: "productionLine_id"});
   RecoveryProcedure.belongsTo(FailureType, { foreignKey: "failureType_id"});
   FailureType.hasMany(RecoveryProcedure, { foreignKey: "failureType_id"});
+  Resource.belongsTo(ResourceType, { foreignKey: "resourceType_id"});
+  ResourceType.hasMany(Resource, { foreignKey: "resourceType_id"});
+  Resource.belongsTo(ResourceSetup, { foreignKey: "resourceSetup_id"});
+  ResourceSetup.hasMany(Resource, { foreignKey: "resourceSetup_id"});
+  ResourceFailure.belongsTo(FailureType, { foreignKey: "failureType_id"});
+  FailureType.hasMany(ResourceFailure, { foreignKey: "failureType_id"});
+  Resource_Measure.belongsTo(Resource, { foreignKey: "resource_id"});
+  Resource.hasMany(Resource_Measure, { foreignKey: "resource_id"});
+  Resource_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
+  Measure.hasOne(Resource_Measure, { foreignKey: "measure_id"});
+  Resource_ResourceFailure.belongsTo(Resource, { foreignKey: "resource_id"});
+  Resource.hasMany(Resource_ResourceFailure, { foreignKey: "resource_id"});
+  Resource_ResourceFailure.belongsTo(ResourceFailure, { foreignKey: "resourceFailure_id"});
+  ResourceFailure.hasMany(Resource_ResourceFailure, { foreignKey: "resourceFailure_id"});
 
   return {
     EngineeringBoM,
@@ -179,6 +209,12 @@ function initModels(sequelize) {
     ProductionOrder,
     Property,
     RecoveryProcedure,
+    Resource,
+    ResourceFailure,
+    ResourceSetup,
+    ResourceType,
+    Resource_Measure,
+    Resource_ResourceFailure,
     State,
     Station,
   };

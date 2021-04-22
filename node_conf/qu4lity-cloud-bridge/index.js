@@ -30,6 +30,7 @@ if (!isProduction) {
 }
 
 /// catch 404 and forward to error handler
+//app.use("/mpfq",require('./routes')); //for testing only
 app.use(require('./routes'));
 
 app.use(function(req, res, next) {

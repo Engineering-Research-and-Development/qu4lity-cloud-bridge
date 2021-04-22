@@ -13,13 +13,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    measureSpecification: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     measureDimension: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     measureType: {
       type: DataTypes.TEXT,

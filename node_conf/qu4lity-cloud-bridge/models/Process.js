@@ -33,6 +33,14 @@ module.exports = function(sequelize, DataTypes) {
         key: 'operation_id'
       }
     },
+    resource_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Resource',
+        key: 'resource_id'
+      }
+    },
     processType_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -40,6 +48,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'ProcessType',
         key: 'processType_id'
       }
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
@@ -81,6 +93,13 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "process_fk_4",
+        using: "BTREE",
+        fields: [
+          { name: "resource_id" },
+        ]
+      },
+      {
+        name: "process_fk_5",
         using: "BTREE",
         fields: [
           { name: "processType_id" },

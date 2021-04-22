@@ -18,7 +18,8 @@ exports.filterOne = (req, res) => {
 
 
 exports.filterAll = (req, res) => {
-  var measureResult = req.body.measureResult
+  const onlyFailures = req.body.measureFailures
+  const type = req.body.type;
   const from = req.body.from;
   const to = req.body.to;
   const limit = req.body.limit;
@@ -26,14 +27,22 @@ exports.filterAll = (req, res) => {
 
 
   var condition = {}
-  if (!measureResult)
-    measureResult = "%"
+
+  if (type){
+    const typeFormatted = type.toLowerCase().charAt(0).toUpperCase() + type.toLowerCase().slice(1)
+    condition["description"] = { [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` }
+  }else
+    condition["description"] = { [Op.like]: 'DRUM LIFTER ASSEMBLY%' }
+
+  if (onlyFailures)
+    condition["$MeasureFailure.measureFailure_id$"] = { [Op.ne]: null }
+
   if (from && to)
     condition["dateTime"] = { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
   else if (from)
     condition["dateTime"] = { [Op.gte]: `${from}` }
   else if (to)
-    condition["dateTime"] = { [Op.lte]: `${to}` }
+    condition["dateTime"] = { [Op.lte]: `${to}` } 
 
   if (!offset)
     offset = 0
@@ -42,7 +51,8 @@ exports.filterAll = (req, res) => {
     attributes: ["measure_id", "description", "measureDimension", "measureType", "dateTime", "dataSingleValue", "usl", "lsl"],
     include: [
       {
-        model: models.MeasureFailure, as: 'MeasureFailures'
+        model: models.MeasureFailure, as: 'MeasureFailure',
+        attributes:["failureType_id", "description"]
       }
     ],
     where: condition,

@@ -61,6 +61,8 @@ docker-compose up
           <td>/drum/test/fetch/all</td>
           <td>Returns all drum test measures. You can pass the followings as body parameter:
               <ul>
+                  <li><a>type</a>: String</li>
+                  <li><a>onlyFailures</a>: Bool</li>
                   <li><a>from</a>: Date</li>
                   <li><a>to</a>: Date</li>
                   <li><a>limit</a>: Int</li>
