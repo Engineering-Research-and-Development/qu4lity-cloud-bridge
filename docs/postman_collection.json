@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"measureSpecification\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": false\r\n}"
+					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": false\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/drum/sensor/fetch/all",
@@ -83,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"measureSpecification\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": true\r\n}"
+					"raw": "{\r\n    \"type\": \"aPeaktimePUMP\",\r\n    \"from\": \"2019-06-05 08:40:00\",\r\n    \"to\": \"2019-06-05 08:45:00\",\r\n    \"limit\": 100,\r\n    \"decoded\": true\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/drum/sensor/fetch/all",
@@ -133,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2019-08-19 10:02:00\",\r\n    \"limit\":100\r\n}"
+					"raw": "{\r\n    \"type\":\"depth\",\r\n    \"onlyFailures\": true,\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2020-08-19 10:02:00\",\r\n    \"limit\":100\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/drum/test/fetch/all",
