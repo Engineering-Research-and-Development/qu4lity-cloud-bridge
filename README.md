@@ -42,7 +42,7 @@ docker-compose up
           <td>/drum/sensor/fetch/all</td>
           <td>Returns all drum sensor measures. You can pass the followings as body parameter:
               <ul>
-                  <li><a>measureSpecification</a>: String - MANDATORY</li>
+                  <li><a>type</a>: String - MANDATORY</li>
                   <li><a>from</a>: Date</li>
                   <li><a>to</a>: Date</li>
                   <li><a>limit</a>: Int</li>
