@@ -34,7 +34,14 @@ module.exports = function(sequelize, DataTypes) {
           { name: "resource_id" },
           { name: "measure_id" },
         ]
-      }
+      },
+      {
+        name: "resource_measure_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "measure_id" },
+        ]
+      },
     ]
   });
 };

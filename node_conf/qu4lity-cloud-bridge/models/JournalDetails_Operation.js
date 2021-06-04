@@ -2,7 +2,16 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Operation_OperationFailure', {
+  return sequelize.define('JournalDetails_Operation', {
+    journalDetails_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'JournalDetails',
+        key: 'journalDetails_id'
+      }
+    },
     operation_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -11,19 +20,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Operation',
         key: 'operation_id'
       }
-    },
-    operationFailure_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'OperationFailure',
-        key: 'operationFailure_id'
-      }
     }
   }, {
     sequelize,
-    tableName: 'Operation_OperationFailure',
+    tableName: 'JournalDetails_Operation',
     timestamps: false,
     indexes: [
       {
@@ -31,15 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
+          { name: "journalDetails_id" },
           { name: "operation_id" },
-          { name: "operationFailure_id" },
         ]
       },
       {
-        name: "operation_operationFailure_fk_2",
+        name: "journalDetails_operation_fk_2",
         using: "BTREE",
         fields: [
-          { name: "operationFailure_id" },
+          { name: "operation_id" },
         ]
       },
     ]

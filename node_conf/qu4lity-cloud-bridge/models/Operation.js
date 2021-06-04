@@ -25,24 +25,24 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
       }
     },
     materialUsedAsTarget_id: {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
       }
     },
     materialTransformation_id: {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: 'Material',
-        key: 'material_id'
+        model: 'EngineeringBoM',
+        key: 'engineeringBoM_id'
       }
     }
   }, {

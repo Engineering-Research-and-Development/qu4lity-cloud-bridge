@@ -9,6 +9,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    occuranceDate: {
+      type: DataTypes.DATE(3),
+      allowNull: true
+    },
     failureType_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -16,14 +24,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'FailureType',
         key: 'failureType_id'
       }
-    },
-    occuranceDate: {
-      type: DataTypes.DATE(3),
-      allowNull: true
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
     }
   }, {
     sequelize,

@@ -2,8 +2,8 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('ProcessFailure', {
-    processFailure_id: {
+  return sequelize.define('ProcessQA', {
+    ProcessQA_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -17,29 +17,34 @@ module.exports = function(sequelize, DataTypes) {
         key: 'process_id'
       }
     },
-    failureType_id: {
+    qa1_drying_performance: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'FailureType',
-        key: 'failureType_id'
-      }
+      allowNull: false,
+      defaultValue: 0
     },
-    recoveryTime: {
+    qa2_noise: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      defaultValue: 0
     },
-    occuranceDate: {
-      type: DataTypes.DATE(3),
-      allowNull: true
+    qa3_energy_consumption: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    qa4_component_failure: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    qa5_perceived_quality: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     sequelize,
-    tableName: 'ProcessFailure',
+    tableName: 'ProcessQA',
     timestamps: false,
     indexes: [
       {
@@ -47,21 +52,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "processFailure_id" },
+          { name: "ProcessQA_id" },
         ]
       },
       {
-        name: "ProcessFailure_fk_1",
+        name: "processQA_fk",
         using: "BTREE",
         fields: [
           { name: "process_id" },
-        ]
-      },
-      {
-        name: "ProcessFailure_fk_2",
-        using: "BTREE",
-        fields: [
-          { name: "failureType_id" },
         ]
       },
     ]

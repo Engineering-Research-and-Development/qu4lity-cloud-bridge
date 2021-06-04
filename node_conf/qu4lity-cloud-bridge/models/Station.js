@@ -13,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    machinery_id: {
-      type: DataTypes.INTEGER,
+    note: {
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
