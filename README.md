@@ -299,10 +299,9 @@ N.B **nginx** is configured to use **Basic authentication**, please remember eit
 ##### Request Example
 
 ```sh
-curl --location --request POST 'http://localhost:8080/mpfq/api/1.0/station/fetch/all' \
+curl --location --request GET 'http://localhost:8080/mpfq/api/1.0/station/list' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic ZXhhbXBsZXVzZXI6cXU0bGl0eSE=' \
---data-raw '{}'
+--header 'Authorization: Basic ZXhhbXBsZXVzZXI6cXU0bGl0eSE=' 
 ```
 ## License
 QU4LITY Cloud Bridge is licensed under the
