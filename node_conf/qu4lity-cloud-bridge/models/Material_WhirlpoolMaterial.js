@@ -2,16 +2,7 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('EngineeringBoM_Material', {
-    engineeringBoM_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'EngineeringBoM',
-        key: 'engineeringBoM_id'
-      }
-    },
+  return sequelize.define('Material_WhirlpoolMaterial', {
     material_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -21,13 +12,18 @@ module.exports = function(sequelize, DataTypes) {
         key: 'material_id'
       }
     },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: true
+    whr_material_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'WhirlpoolMaterial',
+        key: 'whr_material_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'EngineeringBoM_Material',
+    tableName: 'Material_WhirlpoolMaterial',
     timestamps: false,
     indexes: [
       {
@@ -35,15 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "engineeringBoM_id" },
           { name: "material_id" },
+          { name: "whr_material_id" },
         ]
       },
       {
-        name: "engineeringBom_Material_fk_2",
+        name: "material_WhirlpoolMaterial_fk_2",
         using: "BTREE",
         fields: [
-          { name: "material_id" },
+          { name: "whr_material_id" },
         ]
       },
     ]

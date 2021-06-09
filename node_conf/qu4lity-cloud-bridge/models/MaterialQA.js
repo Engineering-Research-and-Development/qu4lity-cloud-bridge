@@ -9,12 +9,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    engineeringBoM_id: {
+    material_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'EngineeringBoM',
-        key: 'engineeringBoM_id'
+        model: 'Material',
+        key: 'material_id'
       }
     },
     type: {
@@ -67,7 +67,7 @@ module.exports = function(sequelize, DataTypes) {
         name: "materialQA_fk",
         using: "BTREE",
         fields: [
-          { name: "engineeringBoM_id" },
+          { name: "material_id" },
         ]
       },
     ]

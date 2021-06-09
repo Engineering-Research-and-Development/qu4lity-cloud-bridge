@@ -33,22 +33,14 @@ exports.filterOne = (req, res) => {
 
 exports.filterAll = (req, res) => {
   const engineeringBoM_id = req.body.engineeringBoM_id;
-  const material_id = req.body.material_id;
 
   var condition = {}
 
   if (engineeringBoM_id)
     condition["engineeringBoM_id"] = { [Op.eq]: `${engineeringBoM_id}` }
-  if (material_id)
-    condition["material_id"] = { [Op.eq]: `${material_id}` }
 
   models.EngineeringBoM_Material.findAll({
-    attributes: [],
     include: [
-      {
-        model: models.EngineeringBoM, as: 'EngineeringBoM',
-        required: true
-      },
       {
         model: models.Material, as: 'Material',
         required: true

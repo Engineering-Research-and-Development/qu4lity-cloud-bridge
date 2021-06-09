@@ -3,9 +3,7 @@ const Op = Sequelize.Op;
 const models = require("../models").models
 
 exports.findAll = (req, res) => {
-  models.Function.findAll({
-    order: [['function_id', 'ASC']]
-  })
+  models.Function.findAll()
     .then(data => {
       res.send(data);
     })
@@ -48,8 +46,12 @@ exports.filterAll = (req, res) => {
     condition["materialUsedAsObject_id"] = { [Op.eq]: `${object}` }
 
   models.Function.findAll({
-    where: condition,
-    order: [['function_id', 'ASC']]
+    include: [
+      {
+        model: models.Process, as: 'Process'
+      }
+    ],
+    where: condition
   })
     .then(data => {
       res.send(data);

@@ -4,12 +4,7 @@ const models = require("../models").models
 
 exports.findAll = (req, res) => {
 
-  models.Station.findAll({
-    include: [
-      { model: models.ProductionLine, as: 'ProductionLine' }
-    ],
-    order: [['station_id', 'ASC']]
-  })
+  models.Station.findAll()
     .then(data => {
       res.send(data);
     })
@@ -35,28 +30,4 @@ exports.filterOne = (req, res) => {
     });
 };
 
-exports.filterAll = (req, res) => {
-  const machinery_id = req.body.machinery_id
-
-  var condition = {}
-  if (machinery_id)
-    condition["machinery_id"] = { [Op.eq]: `${machinery_id}` }
-
-  models.Station.findAll({
-    include: [
-      { model: models.ProductionLine, as: 'ProductionLine' }
-    ],
-    where: condition,
-    order: [['station_id', 'ASC']]
-  })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving stations."
-      });
-    });
-};
 

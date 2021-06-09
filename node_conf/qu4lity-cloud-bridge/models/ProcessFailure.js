@@ -2,20 +2,16 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('OperationFailure', {
-    operationFailure_id: {
+  return sequelize.define('ProcessFailure', {
+    processFailure_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    failureType_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'FailureType',
-        key: 'failureType_id'
-      }
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     recoveryTime: {
       type: DataTypes.INTEGER,
@@ -25,13 +21,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE(3),
       allowNull: true
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    failureType_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'FailureType',
+        key: 'failureType_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'OperationFailure',
+    tableName: 'ProcessFailure',
     timestamps: false,
     indexes: [
       {
@@ -39,11 +39,11 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "operationFailure_id" },
+          { name: "processFailure_id" },
         ]
       },
       {
-        name: "operationFailure_fk",
+        name: "processFailure_fk",
         using: "BTREE",
         fields: [
           { name: "failureType_id" },

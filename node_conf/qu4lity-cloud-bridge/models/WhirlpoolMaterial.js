@@ -2,8 +2,8 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Material', {
-    material_id: {
+  return sequelize.define('WhirlpoolMaterial', {
+    whr_material_id: {
       autoIncrement: true,
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -13,25 +13,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    materialModel: {
+    materialRevisionECN: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    materialFamily_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'MaterialFamily',
-        key: 'materialFamily_id'
-      }
-    },
-    functionUnit_id: {
-      type: DataTypes.INTEGER,
+    materialDrawingNumber: {
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'Material',
+    tableName: 'WhirlpoolMaterial',
     timestamps: false,
     indexes: [
       {
@@ -39,14 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "material_id" },
-        ]
-      },
-      {
-        name: "material_fk_1",
-        using: "BTREE",
-        fields: [
-          { name: "materialFamily_id" },
+          { name: "whr_material_id" },
         ]
       },
     ]

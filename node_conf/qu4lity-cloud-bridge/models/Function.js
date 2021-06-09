@@ -25,8 +25,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'EngineeringBoM',
-        key: 'engineeringBoM_id'
+        model: 'Material',
+        key: 'material_id'
       }
     },
     carrier: {
@@ -41,8 +41,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'EngineeringBoM',
-        key: 'engineeringBoM_id'
+        model: 'Material',
+        key: 'material_id'
       }
     },
     object: {
