@@ -32,12 +32,15 @@ exports.filterOne = (req, res) => {
 
 
 exports.filterAll = (req, res) => {
+  const function_id = req.body.function_id;
   const type = req.body.function;
   const carrier = req.body.materialUsedAsCarried_id;
   const object = req.body.materialUsedAsObject_id;
 
   var condition = {}
 
+  if (function_id)
+    condition["function_id"] = { [Op.eq]: `${function_id}` }
   if (type)
     condition["function"] = { [Op.eq]: `${type}` }
   if (carrier)

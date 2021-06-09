@@ -418,7 +418,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"function\": \"drive\",\r\n    \"materialUsedAsObject_id\": 40001060005,\r\n    \"materialUsedAsCarrier_id\": 40001045000\r\n}"
+					"raw": "{\r\n    \"function_id\": 10101000,\r\n    \"function\": \"drive\",\r\n    \"materialUsedAsObject_id\": 40001060005,\r\n    \"materialUsedAsCarrier_id\": 40001045000\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/function/fetch/all",
@@ -574,6 +574,148 @@
 						"api",
 						"1.0",
 						"journal",
+						"fetch",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List JournalDetails",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/journalDetails/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"journalDetails",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch JournalDetail",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"journalDetails_id\":  1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/journalDetails/fetch/one",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"journalDetails",
+						"fetch",
+						"one"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch JournalDetails",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"journalDetails_id\": 1,\r\n    \"station_id\": 6\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/journalDetails/fetch/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"journalDetails",
 						"fetch",
 						"all"
 					]
@@ -866,6 +1008,148 @@
 			"response": []
 		},
 		{
+			"name": "List Processes",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/process/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"process",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Process",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"process_id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/process/fetch/one",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"process",
+						"fetch",
+						"one"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Processes",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"process_id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/process/fetch/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"process",
+						"fetch",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List ProductionLines",
 			"request": {
 				"auth": {
@@ -1137,148 +1421,6 @@
 						"api",
 						"1.0",
 						"station",
-						"fetch",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List Processes",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "qu4lity!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "exampleuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/process/list",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"mpfq",
-						"api",
-						"1.0",
-						"process",
-						"list"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Filter Process",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "qu4lity!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "exampleuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"process_id\": 1\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/process/fetch/one",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"mpfq",
-						"api",
-						"1.0",
-						"process",
-						"fetch",
-						"one"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Filter Processes",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "qu4lity!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "exampleuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"process_id\": 1\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/mpfq/api/1.0/process/fetch/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"mpfq",
-						"api",
-						"1.0",
-						"process",
 						"fetch",
 						"all"
 					]

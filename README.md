@@ -78,7 +78,7 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/engineeringBoM/fetch/one</td>
-          <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
+          <td>Returns an engineeringBoM. You <b>must</b> pass the followings as body parameter:
               <ul>
                   <li><a>engineeringBoM_id</a>: Int</li>
               </ul>
@@ -87,10 +87,9 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/engineeringBoM/fetch/all</td>
-          <td>Returns a subset of all engineeringBoMs. You can pass the followings as body parameter:
+          <td>Returns a subset of all engineeringBoMs exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
                   <li><a>engineeringBoM_id</a>: Int</li>
-                  <li><a>material_id</a>: Int</li>
               </ul>
           </td>
       </tr>
@@ -102,14 +101,69 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/function/fetch/one</td>
-          <td>Returns a function by passing <a>function_id</a> as body parameter</td>
+          <td>Returns a function. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>function_id</a>: Int</li>
+          </ul>
+      </td>
       </tr>
       <tr>
           <td>POST</td>
           <td>/function/fetch/all</td>
-          <td>Returns a subset of all functions. You can pass the followings as body parameter:
+          <td>Returns a subset of all functions exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
+                  <li><a>function_id</a>: Int</li>
                   <li><a>type</a>: String</li>
+                  <li><a>materialUsedAsObject_id</a>: Int</li>
+                  <li><a>materialUsedAsCarrier_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/journal/list</td>
+          <td>Returns all journals</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/journal/fetch/one</td>
+          <td>Returns a journal. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>journal_id</a>: Int</li>
+          </ul>
+      </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/journal/fetch/all</td>
+          <td>Returns a subset of all journals exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>journal_id</a>: Int</li>
+                <li><a>productionOrder_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/journalDetails/list</td>
+          <td>Returns all journalDetails</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/journalDetails/fetch/one</td>
+          <td>Returns a journalDetails. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>journalDetails_id</a>: Int</li>
+          </ul>
+      </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/journalDetails/fetch/all</td>
+          <td>Returns a subset of all journalDetails exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>journalDetails_id</a>: Int</li>
+                <li><a>productionOrder_id</a>: Int</li>
               </ul>
           </td>
       </tr>
@@ -121,7 +175,44 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/material/fetch/one</td>
-          <td>Returns a material by passing <a>material_id</a> as body parameter</td>
+          <td>Returns a material. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>material_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/material/fetch/all</td>
+          <td>Returns a subset of all materials exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>material_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/operation/list</td>
+          <td>Returns all operations</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/operation/fetch/one</td>
+          <td>Returns an operation. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>operation_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/operation/fetch/all</td>
+          <td>Returns a subset of all operations exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>operation_id</a>: Int</li>
+                <li><a>materialUsedAsObject_id</a>: Int</li>
+                <li><a>materialUsedAsTarget_id</a>: Int</li>
+                <li><a>materialTransformation_id</a>: Int</li>
+              </ul>
+          </td>
       </tr>
       <tr>
           <td>GET</td>
@@ -131,7 +222,19 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/process/fetch/one</td>
-          <td>Returns given process by passing <a>process_id</a> as body parameter</td>
+          <td>Returns a process. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>process_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/process/fetch/all</td>
+          <td>Returns a subset of all processes exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>process_id</a>: Int</li>
+              </ul>
+          </td>
       </tr>
       <tr>
           <td>GET</td>
@@ -141,7 +244,23 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/productionLine/fetch/one</td>
-          <td>Returns given productionLine by passing <a>productionLine_id</a> as body parameter</td>
+          <td>Returns a productionLine. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>productionLine_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/productionOrder/list</td>
+          <td>Returns all productionOrders</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/productionOrder/fetch/one</td>
+          <td>Returns a productionOrder. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>productionOrder_id</a>: Int</li>
+          </ul>
       </tr>
       <tr>
           <td>GET</td>
@@ -151,16 +270,23 @@ docker-compose up
       <tr>
           <td>POST</td>
           <td>/station/fetch/one</td>
-          <td>Returns given station by passing <a>station_id</a> as body parameter</td>
+          <td>Returns a station. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>station_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/whr_material/list</td>
+          <td>Returns all whr_materials</td>
       </tr>
       <tr>
           <td>POST</td>
-          <td>/station/fetch/all</td>
-          <td>Returns a subset of all stations. You can pass the followings as body parameter:
-              <ul>
-                  <li><a>machinery_id</a>: Int</li>
-              </ul>
-          </td>
+          <td>/whr_material/fetch/one</td>
+          <td>Returns a whr_material. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>whr_material_id</a>: Int</li>
+          </ul>
       </tr>
     </tbody>
 </table>
