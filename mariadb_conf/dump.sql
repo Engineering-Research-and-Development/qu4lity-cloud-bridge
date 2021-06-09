@@ -66,13 +66,18 @@ CREATE TABLE IF NOT EXISTS MaterialFamily (
 CREATE TABLE IF NOT EXISTS Material (
   material_id BIGINT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
-  quantity INT,
-  name TEXT (64),
   materialModel TEXT(32),
   materialFamily_id INT,
   functionUnit_id INT,
   PRIMARY KEY (material_id),
   CONSTRAINT material_fk_1 FOREIGN KEY (materialFamily_id) REFERENCES MaterialFamily(materialFamily_id) ON DELETE SET NULL
+);
+CREATE TABLE IF NOT EXISTS WhirlpoolMaterial (
+  whr_material_id BIGINT NOT NULL AUTO_INCREMENT,
+  description TEXT(64),
+  materialRevisionECN TEXT(32),
+  materialDrawingNumber TEXT(32),
+  PRIMARY KEY (whr_material_id)
 );
 CREATE TABLE IF NOT EXISTS Material_Property (
   material_id BIGINT NOT NULL,
@@ -80,6 +85,13 @@ CREATE TABLE IF NOT EXISTS Material_Property (
   PRIMARY KEY (material_id, property_id),
   CONSTRAINT material_property_fk_1 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE,
   CONSTRAINT material_property_fk_2 FOREIGN KEY (property_id) REFERENCES Property(property_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS Material_WhirlpoolMaterial (
+  material_id BIGINT NOT NULL,
+  whr_material_id BIGINT NOT NULL,
+  PRIMARY KEY (material_id, whr_material_id),
+  CONSTRAINT material_WhirlpoolMaterial_fk_1 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE,
+  CONSTRAINT material_WhirlpoolMaterial_fk_2 FOREIGN KEY (whr_material_id) REFERENCES WhirlpoolMaterial(whr_material_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS Material_Measure (
   material_id BIGINT NOT NULL,
@@ -99,6 +111,7 @@ CREATE TABLE IF NOT EXISTS EngineeringBoM (
 CREATE TABLE IF NOT EXISTS EngineeringBoM_Material (
   engineeringBoM_id BIGINT NOT NULL,
   material_id BIGINT NOT NULL,
+  quantity INT,
   PRIMARY KEY (engineeringBoM_id, material_id),
   CONSTRAINT engineeringBom_Material_fk_1 FOREIGN KEY (engineeringBoM_id) REFERENCES EngineeringBoM(engineeringBoM_id) ON DELETE CASCADE,
   CONSTRAINT engineeringBom_Material_fk_2 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE
@@ -137,9 +150,10 @@ CREATE TABLE IF NOT EXISTS Journal (
   startDate DATE,
   endDate DATE,
   status TEXT(64) NOT NULL,
-  productionLine_id INT NOT NULL,
+  productionLine_id INT,
   PRIMARY KEY (journal_id),
-  CONSTRAINT journal_fk FOREIGN KEY (productionOrder_id) REFERENCES ProductionOrder(productionOrder_id) ON DELETE CASCADE
+  CONSTRAINT journal_fk_1 FOREIGN KEY (productionOrder_id) REFERENCES ProductionOrder(productionOrder_id) ON DELETE CASCADE,
+  CONSTRAINT journal_fk_2 FOREIGN KEY (productionLine_id) REFERENCES ProductionLine(productionLine_id) ON DELETE CASCADE
 );
 
 -- ---------------------------------------------------------------------------------------------------------
@@ -147,7 +161,7 @@ CREATE TABLE IF NOT EXISTS Journal (
 CREATE TABLE IF NOT EXISTS Station (
   station_id INT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
-  machinery_id INT(16),
+  note TEXT(128),
   PRIMARY KEY (station_id)
 );
 CREATE TABLE IF NOT EXISTS JournalDetails (
@@ -176,14 +190,6 @@ CREATE TABLE IF NOT EXISTS Product (
   CONSTRAINT product_fk_1 FOREIGN KEY (productionOrder_id) REFERENCES ProductionOrder(productionOrder_id) ON DELETE CASCADE,
   CONSTRAINT product_fk_2 FOREIGN KEY (engineeringBoM_id) REFERENCES EngineeringBoM(engineeringBoM_id) ON DELETE SET NULL
 );
-CREATE TABLE IF NOT EXISTS Product_Material (
-  product_id BIGINT NOT NULL,
-  material_id BIGINT NOT NULL,
-  description TEXT(64),
-  PRIMARY KEY (product_id, material_id),
-  CONSTRAINT product_material_fk_1 FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
-  CONSTRAINT product_material_fk_2 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE
-);
 
 -- ---------------------------------------------------------------------------------------------------------
 
@@ -201,23 +207,12 @@ CREATE TABLE IF NOT EXISTS Operation (
   CONSTRAINT operation_fk_3 FOREIGN KEY (materialTransformation_id) REFERENCES Material(material_id) ON DELETE CASCADE
 );
 
--- ---------------------------------------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS OperationFailure (
-  operationFailure_id INT NOT NULL AUTO_INCREMENT,
-  failureType_id INT,
-  recoveryTime INT,
-  occuranceDate DATETIME(3),
-  description TEXT(64),
-  PRIMARY KEY (operationFailure_id),
-  CONSTRAINT operationFailure_fk FOREIGN KEY (failureType_id) REFERENCES FailureType(failureType_id) ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS Operation_OperationFailure (
+CREATE TABLE IF NOT EXISTS JournalDetails_Operation (
+  journalDetails_id INT NOT NULL,
   operation_id INT NOT NULL,
-  operationFailure_id INT NOT NULL,
-  PRIMARY KEY (operation_id, operationFailure_id),
-  CONSTRAINT operation_operationFailure_fk_1 FOREIGN KEY (operation_id) REFERENCES Operation(operation_id) ON DELETE CASCADE,
-  CONSTRAINT operation_operationFailure_fk_2 FOREIGN KEY (operationFailure_id) REFERENCES OperationFailure(operationFailure_id) ON DELETE CASCADE
+  PRIMARY KEY (journalDetails_id, operation_id),
+  CONSTRAINT journalDetails_operation_fk_1 FOREIGN KEY (journalDetails_id) REFERENCES JournalDetails(journalDetails_id) ON DELETE CASCADE,
+  CONSTRAINT journalDetails_operation_fk_2 FOREIGN KEY (operation_id) REFERENCES Operation(operation_id) ON DELETE CASCADE
 );
 
 -- ---------------------------------------------------------------------------------------------------------
@@ -253,9 +248,9 @@ CREATE TABLE IF NOT EXISTS Resource_Measure (
 
 CREATE TABLE IF NOT EXISTS ResourceFailure (
   resourceFailure_id INT NOT NULL AUTO_INCREMENT,
-  failureType_id INT,
-  occuranceDate DATETIME(3),
   description TEXT(64),
+  occuranceDate DATETIME(3),
+  failureType_id INT,
   PRIMARY KEY (resourceFailure_id),
   CONSTRAINT resourceFailure_fk FOREIGN KEY (failureType_id) REFERENCES FailureType(failureType_id) ON DELETE CASCADE
 );
@@ -310,6 +305,25 @@ CREATE TABLE IF NOT EXISTS Process_Measure (
 
 -- ---------------------------------------------------------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS ProcessFailure (
+  processFailure_id INT NOT NULL AUTO_INCREMENT,
+  description TEXT(64),
+  recoveryTime INT,
+  occuranceDate DATETIME(3),
+  failureType_id INT,
+  PRIMARY KEY (processFailure_id),
+  CONSTRAINT processFailure_fk FOREIGN KEY (failureType_id) REFERENCES FailureType(failureType_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS Process_ProcessFailure (
+  process_id INT NOT NULL,
+  processFailure_id INT NOT NULL,
+  PRIMARY KEY (process_id, processFailure_id),
+  CONSTRAINT process_processFailure_fk_1 FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE,
+  CONSTRAINT process_processFailure_fk_2 FOREIGN KEY (processFailure_id) REFERENCES ProcessFailure(processFailure_id) ON DELETE CASCADE
+);
+
+-- ---------------------------------------------------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS Function (
   function_id INT NOT NULL AUTO_INCREMENT,
   process_id INT,
@@ -321,8 +335,8 @@ CREATE TABLE IF NOT EXISTS Function (
   object TEXT(32) NOT NULL,
   PRIMARY KEY (function_id),
   CONSTRAINT function_fk_1 FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE,
-  CONSTRAINT function_fk_2 FOREIGN KEY (materialUsedAsCarrier_id) REFERENCES EngineeringBoM(engineeringBoM_id) ON DELETE CASCADE,
-  CONSTRAINT function_fk_3 FOREIGN KEY (materialUsedAsObject_id) REFERENCES EngineeringBoM(engineeringBoM_id) ON DELETE CASCADE
+  CONSTRAINT function_fk_2 FOREIGN KEY (materialUsedAsCarrier_id) REFERENCES Material(material_id) ON DELETE CASCADE,
+  CONSTRAINT function_fk_3 FOREIGN KEY (materialUsedAsObject_id) REFERENCES Material(material_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS Function_Measure (
   function_id INT NOT NULL,
@@ -333,3 +347,41 @@ CREATE TABLE IF NOT EXISTS Function_Measure (
 );
 
 -- ---------------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS MaterialQA (
+  materialQA_id INT NOT NULL AUTO_INCREMENT,
+  material_id BIGINT NOT NULL,
+  type TEXT(32),
+  functionUnit_id INT,
+  qa1_drying_performance INT NOT NULL DEFAULT 0,
+  qa2_noise INT NOT NULL DEFAULT 0,
+  qa3_energy_consumption INT NOT NULL DEFAULT 0,
+  qa4_component_failure INT NOT NULL DEFAULT 0,
+  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (materialQA_id),
+  CONSTRAINT materialQA_fk FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS FunctionQA (
+  functionQA_id INT NOT NULL AUTO_INCREMENT,
+  function_id INT NOT NULL,
+  qa1_drying_performance INT NOT NULL DEFAULT 0,
+  qa2_noise INT NOT NULL DEFAULT 0,
+  qa3_energy_consumption INT NOT NULL DEFAULT 0,
+  qa4_component_failure INT NOT NULL DEFAULT 0,
+  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (functionQA_id),
+  CONSTRAINT functionQA_fk FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ProcessQA (
+  ProcessQA_id INT NOT NULL AUTO_INCREMENT,
+  process_id INT NOT NULL,
+  qa1_drying_performance INT NOT NULL DEFAULT 0,
+  qa2_noise INT NOT NULL DEFAULT 0,
+  qa3_energy_consumption INT NOT NULL DEFAULT 0,
+  qa4_component_failure INT NOT NULL DEFAULT 0,
+  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (ProcessQA_id),
+  CONSTRAINT processQA_fk FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE
+);
