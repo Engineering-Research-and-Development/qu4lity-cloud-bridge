@@ -1336,6 +1336,148 @@
 			"response": []
 		},
 		{
+			"name": "List Resources",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/resource/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"resource",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Resource",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resource_id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/resource/fetch/one",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"resource",
+						"fetch",
+						"one"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Resources",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resource_id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/resource/fetch/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"resource",
+						"fetch",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List Stations",
 			"request": {
 				"auth": {

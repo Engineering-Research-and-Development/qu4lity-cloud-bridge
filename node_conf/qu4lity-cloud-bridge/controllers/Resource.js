@@ -2,48 +2,46 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const models = require("../models").models
 
+
 exports.findAll = (req, res) => {
 
-  models.Material.findAll()
+  models.Resource.findAll()
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Materials."
+          err.message || "Some error occurred while retrieving Resources."
       });
     });
 };
 
 exports.filterOne = (req, res) => {
-  const material_id = req.body.material_id;
-
-  models.Material.findByPk(material_id)
+  const resource_id = req.body.resource_id;
+  
+  models.Resource.findByPk(resource_id)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Material with id=" + material_id
+        message: "Error retrieving Resource with id=" + resource_id
       });
     });
 };
 
 exports.filterAll = (req, res) => {
-  const material_id = req.body.material_id;
+  const resource_id = req.body.resource_id;
 
   var condition = {}
-  if (material_id)
-    condition["material_id"] = { [Op.eq]: material_id }
+  if (resource_id)
+    condition["resource_id"] = { [Op.eq]: resource_id }
 
-  models.Material.findAll({
-    include: [
+  models.Resource.findAll({
+    include:[
       {
-        model: models.WhirlpoolMaterial, as: 'WhirlpoolMaterials',
-      },
-      {
-        model: models.Measure, as: 'Measures'
+        model: models.Material, as: 'Materials',
       }
     ],
     where: condition
@@ -54,7 +52,7 @@ exports.filterAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Materials."
+          err.message || "Some error occurred while retrieving Resources."
       });
     });
 };

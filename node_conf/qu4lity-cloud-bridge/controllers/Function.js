@@ -52,6 +52,9 @@ exports.filterAll = (req, res) => {
     include: [
       {
         model: models.Process, as: 'Process'
+      },
+      {
+        model: models.Measure, as: 'Measures'
       }
     ],
     where: condition

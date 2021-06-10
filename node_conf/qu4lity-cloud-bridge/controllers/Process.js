@@ -5,16 +5,14 @@ const models = require("../models").models
 
 exports.findAll = (req, res) => {
 
-  models.Process.findAll({
-    order: [['process_id', 'ASC']]
-  })
+  models.Process.findAll()
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving processes."
+          err.message || "Some error occurred while retrieving Processes."
       });
     });
 };
@@ -57,7 +55,7 @@ exports.filterAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving processes."
+          err.message || "Some error occurred while retrieving Processes."
       });
     });
 };

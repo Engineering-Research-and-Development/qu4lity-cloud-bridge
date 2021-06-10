@@ -11,6 +11,7 @@ const _operation = require("../../controllers/Operation.js");
 const _process = require("../../controllers/Process.js");
 const _productionLine = require("../../controllers/ProductionLine.js");
 const _station = require("../../controllers/Station.js");
+const _resource = require("../../controllers/Resouce.js");
 const _whr_material = require("../../controllers/WhirlpoolMaterial.js");
 
 router.post("/drum/sensor/fetch/one", _drumSensor.filterOne);
@@ -51,6 +52,10 @@ router.post("/productionLine/fetch/one", _productionLine.filterOne);
 
 router.get("/productionOrder/list", _productionLine.findAll); 
 router.post("/productionOrder/fetch/one", _productionLine.filterOne);
+
+router.get("/resource/list", _resource.findAll);
+router.post("/resource/fetch/one", _resource.filterOne);
+router.post("/resource/fetch/all", _resource.filterAll);
 
 router.get("/station/list", _station.findAll);
 router.post("/station/fetch/one", _station.filterOne);

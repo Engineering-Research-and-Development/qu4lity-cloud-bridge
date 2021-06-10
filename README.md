@@ -264,6 +264,28 @@ docker-compose up
       </tr>
       <tr>
           <td>GET</td>
+          <td>/resource/list</td>
+          <td>Returns all resources</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/resource/fetch/one</td>
+          <td>Returns a resource. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>resource_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/resource/fetch/all</td>
+          <td>Returns a subset of all resources exploding the nested inclusions. You can pass the followings as body parameter:
+              <ul>
+                <li><a>resource_id</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>GET</td>
           <td>/station/list</td>
           <td>Returns all stations</td>
       </tr>
@@ -301,7 +323,7 @@ N.B **nginx** is configured to use **Basic authentication**, please remember eit
 ```sh
 curl --location --request GET 'http://localhost:8080/mpfq/api/1.0/station/list' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic ZXhhbXBsZXVzZXI6cXU0bGl0eSE=' 
+--header 'Authorization: Basic ZXhhbXBsZXVzZXI6cXU0bGl0eSE='
 ```
 ## License
 QU4LITY Cloud Bridge is licensed under the
