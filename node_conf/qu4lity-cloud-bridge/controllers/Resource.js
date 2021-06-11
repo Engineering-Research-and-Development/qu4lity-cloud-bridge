@@ -41,7 +41,7 @@ exports.filterAll = (req, res) => {
   models.Resource.findAll({
     include:[
       {
-        model: models.Material, as: 'Materials',
+        model: models.ResourceSetup, as: 'ResourceSetups',
       }
     ],
     where: condition

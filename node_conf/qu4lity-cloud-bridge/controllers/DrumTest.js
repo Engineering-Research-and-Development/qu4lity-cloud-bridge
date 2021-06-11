@@ -18,7 +18,7 @@ exports.filterOne = (req, res) => {
 
 
 exports.filterAll = (req, res) => {
-  const onlyFailures = req.body.measureFailures
+  const onlyFailures = req.body.onlyFailures
   const type = req.body.type;
   const from = req.body.from;
   const to = req.body.to;
@@ -27,6 +27,7 @@ exports.filterAll = (req, res) => {
 
 
   var condition = {}
+  var measureFailureCondition = {}
 
   if (type){
     const typeFormatted = type.toLowerCase().charAt(0).toUpperCase() + type.toLowerCase().slice(1)
@@ -35,7 +36,7 @@ exports.filterAll = (req, res) => {
     condition["description"] = { [Op.like]: 'DRUM LIFTER ASSEMBLY%' }
 
   if (onlyFailures)
-    condition["$MeasureFailure.measureFailure_id$"] = { [Op.ne]: null }
+    measureFailureCondition["measureFailure_id"] = { [Op.ne]: null }
 
   if (from && to)
     condition["dateTime"] = { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
@@ -51,8 +52,17 @@ exports.filterAll = (req, res) => {
     attributes: ["measure_id", "description", "measureDimension", "measureType", "dateTime", "dataSingleValue", "usl", "lsl"],
     include: [
       {
-        model: models.MeasureFailure, as: 'MeasureFailure',
-        attributes:["failureType_id", "description"]
+        model: models.MeasureFailure, as: 'MeasureFailures',
+        where: measureFailureCondition
+      },
+      {
+        model: models.Function_Measure, as: 'Function_Measures',
+      },
+      {
+        model: models.Material_Measure, as: 'Material_Measures',
+      },
+      {
+        model: models.Resource_Measure, as: 'Resource_Measures',
       }
     ],
     where: condition,

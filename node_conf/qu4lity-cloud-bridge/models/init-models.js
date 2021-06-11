@@ -22,7 +22,6 @@ var _Process = require("./Process");
 var _ProcessFailure = require("./ProcessFailure");
 var _ProcessQA = require("./ProcessQA");
 var _ProcessType = require("./ProcessType");
-var _Process_Measure = require("./Process_Measure");
 var _Process_ProcessFailure = require("./Process_ProcessFailure");
 var _Product = require("./Product");
 var _ProductionLine = require("./ProductionLine");
@@ -35,6 +34,7 @@ var _ResourceSetup = require("./ResourceSetup");
 var _ResourceType = require("./ResourceType");
 var _Resource_Measure = require("./Resource_Measure");
 var _Resource_ResourceFailure = require("./Resource_ResourceFailure");
+var _Resource_ResourceSetup = require("./Resource_ResourceSetup");
 var _State = require("./State");
 var _Station = require("./Station");
 var _WhirlpoolMaterial = require("./WhirlpoolMaterial");
@@ -63,7 +63,6 @@ function initModels(sequelize) {
   var ProcessFailure = _ProcessFailure(sequelize, DataTypes);
   var ProcessQA = _ProcessQA(sequelize, DataTypes);
   var ProcessType = _ProcessType(sequelize, DataTypes);
-  var Process_Measure = _Process_Measure(sequelize, DataTypes);
   var Process_ProcessFailure = _Process_ProcessFailure(sequelize, DataTypes);
   var Product = _Product(sequelize, DataTypes);
   var ProductionLine = _ProductionLine(sequelize, DataTypes);
@@ -76,6 +75,7 @@ function initModels(sequelize) {
   var ResourceType = _ResourceType(sequelize, DataTypes);
   var Resource_Measure = _Resource_Measure(sequelize, DataTypes);
   var Resource_ResourceFailure = _Resource_ResourceFailure(sequelize, DataTypes);
+  var Resource_ResourceSetup = _Resource_ResourceSetup(sequelize, DataTypes);
   var State = _State(sequelize, DataTypes);
   var Station = _Station(sequelize, DataTypes);
   var WhirlpoolMaterial = _WhirlpoolMaterial(sequelize, DataTypes);
@@ -92,14 +92,14 @@ function initModels(sequelize) {
   Material.belongsToMany(Property, { through: Material_Property, foreignKey: "material_id", otherKey: "property_id" });
   WhirlpoolMaterial.belongsToMany(Material, { through: Material_WhirlpoolMaterial, foreignKey: "whr_material_id", otherKey: "material_id" });
   Material.belongsToMany(WhirlpoolMaterial, { through: Material_WhirlpoolMaterial, foreignKey: "material_id", otherKey: "whr_material_id" });
-  Measure.belongsToMany(Process, { through: Process_Measure, foreignKey: "measure_id", otherKey: "process_id" });
-  Process.belongsToMany(Measure, { through: Process_Measure, foreignKey: "process_id", otherKey: "measure_id" });
   ProcessFailure.belongsToMany(Process, { through: Process_ProcessFailure, foreignKey: "processFailure_id", otherKey: "process_id" });
   Process.belongsToMany(ProcessFailure, { through: Process_ProcessFailure, foreignKey: "process_id", otherKey: "processFailure_id" });
   Measure.belongsToMany(Resource, { through: Resource_Measure, foreignKey: "measure_id", otherKey: "resource_id" });
   Resource.belongsToMany(Measure, { through: Resource_Measure, foreignKey: "resource_id", otherKey: "measure_id" });
   ResourceFailure.belongsToMany(Resource, { through: Resource_ResourceFailure, foreignKey: "resourceFailure_id", otherKey: "resource_id" });
   Resource.belongsToMany(ResourceFailure, { through: Resource_ResourceFailure, foreignKey: "resource_id", otherKey: "resourceFailure_id" });
+  ResourceSetup.belongsToMany(Resource, { through: Resource_ResourceSetup, foreignKey: "resourceSetup_id", otherKey: "resource_id" });
+  Resource.belongsToMany(ResourceSetup, { through: Resource_ResourceSetup, foreignKey: "resource_id", otherKey: "resourceSetup_id" });
   EngineeringBoM_Material.belongsTo(EngineeringBoM, { foreignKey: "engineeringBoM_id"});
   EngineeringBoM.hasMany(EngineeringBoM_Material, { foreignKey: "engineeringBoM_id"});
   EngineeringBoM_Material.belongsTo(Material, { foreignKey: "material_id"});
@@ -168,10 +168,6 @@ function initModels(sequelize) {
   FailureType.hasMany(ProcessFailure, { foreignKey: "failureType_id"});
   ProcessQA.belongsTo(Process, { foreignKey: "process_id"});
   Process.hasMany(ProcessQA, { foreignKey: "process_id"});
-  Process_Measure.belongsTo(Process, { foreignKey: "process_id"});
-  Process.hasMany(Process_Measure, { foreignKey: "process_id"});
-  Process_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
-  Measure.hasMany(Process_Measure, { foreignKey: "measure_id"});
   Process_ProcessFailure.belongsTo(Process, { foreignKey: "process_id"});
   Process.hasMany(Process_ProcessFailure, { foreignKey: "process_id"});
   Process_ProcessFailure.belongsTo(ProcessFailure, { foreignKey: "processFailure_id"});
@@ -186,8 +182,6 @@ function initModels(sequelize) {
   FailureType.hasMany(RecoveryProcedure, { foreignKey: "failureType_id"});
   Resource.belongsTo(ResourceType, { foreignKey: "resourceType_id"});
   ResourceType.hasMany(Resource, { foreignKey: "resourceType_id"});
-  Resource.belongsTo(ResourceSetup, { foreignKey: "resourceSetup_id"});
-  ResourceSetup.hasMany(Resource, { foreignKey: "resourceSetup_id"});
   ResourceFailure.belongsTo(FailureType, { foreignKey: "failureType_id"});
   FailureType.hasMany(ResourceFailure, { foreignKey: "failureType_id"});
   Resource_Measure.belongsTo(Resource, { foreignKey: "resource_id"});
@@ -198,6 +192,10 @@ function initModels(sequelize) {
   Resource.hasMany(Resource_ResourceFailure, { foreignKey: "resource_id"});
   Resource_ResourceFailure.belongsTo(ResourceFailure, { foreignKey: "resourceFailure_id"});
   ResourceFailure.hasMany(Resource_ResourceFailure, { foreignKey: "resourceFailure_id"});
+  Resource_ResourceSetup.belongsTo(Resource, { foreignKey: "resource_id"});
+  Resource.hasMany(Resource_ResourceSetup, { foreignKey: "resource_id"});
+  Resource_ResourceSetup.belongsTo(ResourceSetup, { foreignKey: "resourceSetup_id"});
+  ResourceSetup.hasMany(Resource_ResourceSetup, { foreignKey: "resourceSetup_id"});
 
   return {
     EngineeringBoM,
@@ -223,7 +221,6 @@ function initModels(sequelize) {
     ProcessFailure,
     ProcessQA,
     ProcessType,
-    Process_Measure,
     Process_ProcessFailure,
     Product,
     ProductionLine,
@@ -236,6 +233,7 @@ function initModels(sequelize) {
     ResourceType,
     Resource_Measure,
     Resource_ResourceFailure,
+    Resource_ResourceSetup,
     State,
     Station,
     WhirlpoolMaterial,

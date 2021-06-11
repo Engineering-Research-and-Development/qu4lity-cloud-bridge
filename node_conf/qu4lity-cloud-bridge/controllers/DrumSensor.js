@@ -62,6 +62,17 @@ exports.filterAll = (req, res) => {
     offset = 0
 
   models.Measure.findAll({
+    include: [
+      {
+        model: models.Function_Measure, as: 'Function_Measures',
+      },
+      {
+        model: models.Material_Measure, as: 'Material_Measures',
+      },
+      {
+        model: models.Resource_Measure, as: 'Resource_Measures',
+      }
+    ],
     where: condition,
     order: [['dateTime', 'DESC']],
     limit: limit,
@@ -81,6 +92,10 @@ exports.filterAll = (req, res) => {
         json["dateTime"] = row.dateTime;
         json["dataSeriesUSL"] = row.dataSeriesUSL;
         json["dataSeriesLSL"] = row.dataSeriesLSL;
+        json["dataSeriesLSL"] = row.dataSeriesLSL;
+        json["Function_Measures"] = row.Function_Measures;
+        json["Material_Measures"] = row.Material_Measures;
+        json["Resource_Measures"] = row.Resource_Measures;
 
         if (toBeDecoded != null && toBeDecoded == true && needsDecoding.indexOf(type) > -1) {
           var extracted = utils.iee754Extractor(row.dataSeriesValue);

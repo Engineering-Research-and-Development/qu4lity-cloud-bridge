@@ -2,28 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Process_Measure', {
-    process_id: {
+  return sequelize.define('Resource_ResourceSetup', {
+    resource_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Process',
-        key: 'process_id'
+        model: 'Resource',
+        key: 'resource_id'
       }
     },
-    measure_id: {
+    resourceSetup_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Measure',
-        key: 'measure_id'
+        model: 'ResourceSetup',
+        key: 'resourceSetup_id'
       }
     }
   }, {
     sequelize,
-    tableName: 'Process_Measure',
+    tableName: 'Resource_ResourceSetup',
     timestamps: false,
     indexes: [
       {
@@ -31,15 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "process_id" },
-          { name: "measure_id" },
+          { name: "resource_id" },
+          { name: "resourceSetup_id" },
         ]
       },
       {
-        name: "Process_measure_fk_2",
+        name: "resource_resourceSetup_fk_2",
         using: "BTREE",
         fields: [
-          { name: "measure_id" },
+          { name: "resourceSetup_id" },
         ]
       },
     ]

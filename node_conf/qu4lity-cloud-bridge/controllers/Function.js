@@ -10,7 +10,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving functions."
+          err.message || "Some error occurred while retrieving Functions."
       });
     });
 };
@@ -52,9 +52,6 @@ exports.filterAll = (req, res) => {
     include: [
       {
         model: models.Process, as: 'Process'
-      },
-      {
-        model: models.Measure, as: 'Measures'
       }
     ],
     where: condition
@@ -65,7 +62,8 @@ exports.filterAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving functions."
+          err.message || "Some error occurred while retrieving Functions."
       });
     });
 };
+

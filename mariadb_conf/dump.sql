@@ -231,10 +231,8 @@ CREATE TABLE IF NOT EXISTS Resource (
   resource_id INT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
   resourceType_id INT,
-  resourceSetup_id INT,
   PRIMARY KEY (resource_id),
-  CONSTRAINT resource_fk_1 FOREIGN KEY (resourceType_id) REFERENCES ResourceType(resourceType_id) ON DELETE SET NULL,
-  CONSTRAINT resource_fk_2 FOREIGN KEY (resourceSetup_id) REFERENCES ResourceSetup(resourceSetup_id) ON DELETE SET NULL
+  CONSTRAINT resource_fk_1 FOREIGN KEY (resourceType_id) REFERENCES ResourceType(resourceType_id) ON DELETE SET NULL
 );
 CREATE TABLE IF NOT EXISTS Resource_Measure (
   resource_id INT NOT NULL,
@@ -242,6 +240,13 @@ CREATE TABLE IF NOT EXISTS Resource_Measure (
   PRIMARY KEY (resource_id, measure_id),
   CONSTRAINT resource_measure_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
   CONSTRAINT resource_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS Resource_ResourceSetup (
+  resource_id INT NOT NULL,
+  resourceSetup_id INT NOT NULL,
+  PRIMARY KEY (resource_id, resourceSetup_id),
+  CONSTRAINT resource_resourceSetup_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
+  CONSTRAINT resource_resourceSetup_fk_2 FOREIGN KEY (resourceSetup_id) REFERENCES ResourceSetup(resourceSetup_id) ON DELETE CASCADE
 );
 
 -- ---------------------------------------------------------------------------------------------------------
@@ -294,13 +299,6 @@ CREATE TABLE IF NOT EXISTS Process (
   CONSTRAINT process_fk_3 FOREIGN KEY (operation_id) REFERENCES Operation(operation_id) ON DELETE SET NULL,
   CONSTRAINT process_fk_4 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE SET NULL,
   CONSTRAINT process_fk_5 FOREIGN KEY (processType_id) REFERENCES ProcessType(processType_id) ON DELETE SET NULL
-);
-CREATE TABLE IF NOT EXISTS Process_Measure (
-  process_id INT NOT NULL,
-  measure_id INT NOT NULL,
-  PRIMARY KEY (Process_id, measure_id),
-  CONSTRAINT Process_measure_fk_1 FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE,
-  CONSTRAINT Process_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
 );
 
 -- ---------------------------------------------------------------------------------------------------------

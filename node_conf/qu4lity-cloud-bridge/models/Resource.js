@@ -20,14 +20,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'ResourceType',
         key: 'resourceType_id'
       }
-    },
-    resourceSetup_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'ResourceSetup',
-        key: 'resourceSetup_id'
-      }
     }
   }, {
     sequelize,
@@ -47,13 +39,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "resourceType_id" },
-        ]
-      },
-      {
-        name: "resource_fk_2",
-        using: "BTREE",
-        fields: [
-          { name: "resourceSetup_id" },
         ]
       },
     ]

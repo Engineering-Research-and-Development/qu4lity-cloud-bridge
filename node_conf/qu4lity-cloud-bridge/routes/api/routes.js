@@ -11,7 +11,7 @@ const _operation = require("../../controllers/Operation.js");
 const _process = require("../../controllers/Process.js");
 const _productionLine = require("../../controllers/ProductionLine.js");
 const _station = require("../../controllers/Station.js");
-const _resource = require("../../controllers/Resouce.js");
+const _resource = require("../../controllers/Resource.js");
 const _whr_material = require("../../controllers/WhirlpoolMaterial.js");
 
 router.post("/drum/sensor/fetch/one", _drumSensor.filterOne);
