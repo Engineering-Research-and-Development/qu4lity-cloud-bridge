@@ -34,7 +34,7 @@ exports.filterOne = (req, res) => {
 exports.filterAll = (req, res) => {
   const function_id = req.body.function_id;
   const type = req.body.function;
-  const carrier = req.body.materialUsedAsCarried_id;
+  const carrier = req.body.materialUsedAsCarrier_id;
   const object = req.body.materialUsedAsObject_id;
 
   var condition = {}
@@ -66,4 +66,3 @@ exports.filterAll = (req, res) => {
       });
     });
 };
-
