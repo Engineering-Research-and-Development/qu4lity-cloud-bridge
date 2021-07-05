@@ -36,7 +36,7 @@ exports.filterAll = (req, res) => {
     const station_id = req.body.station_id;
 
     var condition = {}
-    if (journalDetail_id)
+    if (journalDetails_id)
       condition["journalDetails_id"] = { [Op.eq]: journalDetails_id }
     if (station_id)
     condition["station_id"] = { [Op.eq]: station_id }
