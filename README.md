@@ -116,6 +116,11 @@ docker-compose up
                   <li><a>type</a>: String</li>
                   <li><a>materialUsedAsObject_id</a>: Int</li>
                   <li><a>materialUsedAsCarrier_id</a>: Int</li>
+                  <li><a>measureType</a>: String</li>
+                  <li><a>from</a>: Date</li>
+                  <li><a>to</a>: Date</li>
+                  <li><a>limit</a>: Int</li>
+                  <li><a>offset</a>: Int</li>
               </ul>
           </td>
       </tr>
@@ -186,6 +191,11 @@ docker-compose up
           <td>Returns a subset of all materials exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
                 <li><a>material_id</a>: Int</li>
+                <li><a>measureType</a>: String</li>
+                <li><a>from</a>: Date</li>
+                <li><a>to</a>: Date</li>
+                <li><a>limit</a>: Int</li>
+                <li><a>offset</a>: Int</li>
               </ul>
           </td>
       </tr>
@@ -281,6 +291,11 @@ docker-compose up
           <td>Returns a subset of all resources exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
                 <li><a>resource_id</a>: Int</li>
+                <li><a>measureType</a>: String</li>
+                <li><a>from</a>: Date</li>
+                <li><a>to</a>: Date</li>
+                <li><a>limit</a>: Int</li>
+                <li><a>offset</a>: Int</li>
               </ul>
           </td>
       </tr>

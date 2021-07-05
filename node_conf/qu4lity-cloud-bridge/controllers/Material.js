@@ -32,10 +32,41 @@ exports.filterOne = (req, res) => {
 
 exports.filterAll = (req, res) => {
   const material_id = req.body.material_id;
+  const measureType = req.body.measureType;
+  const from = req.body.from;
+  const to = req.body.to;
+  const limit = req.body.limit;
+  var offset = req.body.offset;
 
   var condition = {}
   if (material_id)
     condition["material_id"] = { [Op.eq]: material_id }
+
+  var measureCondition = {}
+
+  if (measureType){
+    const typeFormatted = measureType.toLowerCase().charAt(0).toUpperCase() + measureType.toLowerCase().slice(1)
+    measureCondition["description"] = { 
+      [Op.or]: [
+        {
+          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
+        },
+        {
+          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
+        }
+      ]
+    }
+  }
+
+  if (from && to)
+    measureCondition["dateTime"] = { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
+  else if (from)
+    measureCondition["dateTime"] = { [Op.gte]: `${from}` }
+  else if (to)
+    measureCondition["dateTime"] = { [Op.lte]: `${to}` } 
+
+  if (!offset)
+    offset = 0
 
   models.Material.findAll({
     include: [
@@ -43,10 +74,13 @@ exports.filterAll = (req, res) => {
         model: models.WhirlpoolMaterial, as: 'WhirlpoolMaterials',
       },
       {
-        model: models.Measure, as: 'Measures'
+        model: models.Measure, as: 'Measures',
+        where: measureCondition
       }
     ],
-    where: condition
+    where: condition,
+    limit: limit,
+    offset: offset
   })
     .then(data => {
       res.send(data);

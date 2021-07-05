@@ -36,6 +36,11 @@ exports.filterAll = (req, res) => {
   const type = req.body.function;
   const carrier = req.body.materialUsedAsCarrier_id;
   const object = req.body.materialUsedAsObject_id;
+  const measureType = req.body.measureType;
+  const from = req.body.from;
+  const to = req.body.to;
+  const limit = req.body.limit;
+  var offset = req.body.offset;
 
   var condition = {}
 
@@ -48,13 +53,45 @@ exports.filterAll = (req, res) => {
   if (object)
     condition["materialUsedAsObject_id"] = { [Op.eq]: `${object}` }
 
+  var measureCondition = {}
+
+  if (measureType){
+    const typeFormatted = measureType.toLowerCase().charAt(0).toUpperCase() + measureType.toLowerCase().slice(1)
+    measureCondition["description"] = { 
+      [Op.or]: [
+        {
+          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
+        },
+        {
+          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
+        }
+      ]
+    }
+  }
+
+  if (from && to)
+    measureCondition["dateTime"] = { [Op.gte]: `${from}`, [Op.lte]: `${to}` }
+  else if (from)
+    measureCondition["dateTime"] = { [Op.gte]: `${from}` }
+  else if (to)
+    measureCondition["dateTime"] = { [Op.lte]: `${to}` } 
+
+  if (!offset)
+    offset = 0
+    
   models.Function.findAll({
     include: [
       {
         model: models.Process, as: 'Process'
+      },
+      {
+        model: models.Measure, as: 'Measures',
+        where: measureCondition
       }
     ],
-    where: condition
+    where: condition,
+    limit: limit,
+    offset: offset
   })
     .then(data => {
       res.send(data);
@@ -66,3 +103,4 @@ exports.filterAll = (req, res) => {
       });
     });
 };
+

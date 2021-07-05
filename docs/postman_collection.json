@@ -200,7 +200,7 @@
 			"response": []
 		},
 		{
-			"name": "FetchEngineeringBoM",
+			"name": "Filter EngineeringBoM",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -249,7 +249,7 @@
 			"response": []
 		},
 		{
-			"name": "FetchEngineeringBoMs",
+			"name": "Filter EngineeringBoMs",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -342,7 +342,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch Function",
+			"name": "Filter Function",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -391,7 +391,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch Functions",
+			"name": "Filter Functions",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -418,7 +418,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"function_id\": 10101000,\r\n    \"function\": \"drive\",\r\n    \"materialUsedAsObject_id\": 40001060005,\r\n    \"materialUsedAsCarrier_id\": 40001045000\r\n}"
+					"raw": "{\r\n    \"function_id\": 10351005,\r\n    \"function\": \"hold\",\r\n    \"materialUsedAsObject_id\": 40001035004,\r\n    \"materialUsedAsCarrier_id\": 40001035003,\r\n    \"measureType\":\"height\",\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2020-08-19 10:02:00\",\r\n    \"limit\":100\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/function/fetch/all",
@@ -484,7 +484,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch Journal",
+			"name": "Filter Journal",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -533,7 +533,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch Journals",
+			"name": "Filter Journals",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -626,7 +626,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch JournalDetail",
+			"name": "Filter JournalDetail",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -675,7 +675,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch JournalDetails",
+			"name": "Filter JournalDetails",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -844,7 +844,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"material_id\": 40001010000\r\n}"
+					"raw": "{\r\n   \"material_id\": 40001035000,\r\n   \"measureType\": \"planarity\",\r\n   \"from\":\"2019-08-19 10:00:00\",\r\n   \"to\":\"2020-08-19 10:02:00\",\r\n   \"limit\":10\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/material/fetch/all",
@@ -1456,7 +1456,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"resource_id\": 1\r\n}"
+					"raw": "{\r\n    \"resource_id\": 236,\r\n    \"measureType\":\"concentricity\",\r\n    \"from\":\"2019-08-19 10:00:00\",\r\n    \"to\":\"2020-08-19 10:02:00\",\r\n    \"limit\":100\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/mpfq/api/1.0/resource/fetch/all",
@@ -1522,7 +1522,7 @@
 			"response": []
 		},
 		{
-			"name": "Fetch Station",
+			"name": "Filter Station",
 			"request": {
 				"auth": {
 					"type": "basic",
