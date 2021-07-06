@@ -342,6 +342,55 @@
 			"response": []
 		},
 		{
+			"name": "List Functions by parameters",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "qu4lity!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "exampleuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"function_id\": 10351005,\r\n    \"function\": \"hold\",\r\n    \"materialUsedAsObject_id\": 40001035004,\r\n    \"materialUsedAsCarrier_id\": 40001035003,\r\n    \"limit\":100\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/mpfq/api/1.0/function/list/by",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mpfq",
+						"api",
+						"1.0",
+						"function",
+						"list",
+						"by"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Filter Function",
 			"request": {
 				"auth": {

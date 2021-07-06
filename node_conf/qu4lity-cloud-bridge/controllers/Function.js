@@ -16,6 +16,50 @@ exports.findAll = (req, res) => {
 };
 
 
+exports.findByParameters = (req, res) => {
+  const function_id = req.body.function_id;
+  const type = req.body.function;
+  const carrier = req.body.materialUsedAsCarrier_id;
+  const object = req.body.materialUsedAsObject_id;
+  const limit = req.body.limit;
+  var offset = req.body.offset;
+
+  var condition = {}
+
+  if (function_id)
+    condition["function_id"] = { [Op.eq]: `${function_id}` }
+  if (type)
+    condition["function"] = { [Op.eq]: `${type}` }
+  if (carrier)
+    condition["materialUsedAsCarrier_id"] = { [Op.eq]: `${carrier}` }
+  if (object)
+    condition["materialUsedAsObject_id"] = { [Op.eq]: `${object}` }
+
+  if (!offset)
+    offset = 0
+    
+  models.Function.findAll({
+    include: [
+      {
+        model: models.Process, as: 'Process'
+      }
+    ],
+    where: condition,
+    limit: limit,
+    offset: offset
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Functions."
+      });
+    });
+};
+
+
 exports.filterOne = (req, res) => {
   const function_id = req.body.function_id;
 

@@ -100,6 +100,20 @@ docker-compose up
       </tr>
       <tr>
           <td>POST</td>
+          <td>/function/list/by</td>
+          <td>Returns a subset of functions. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>function_id</a>: Int</li>
+                  <li><a>function</a>: String</li>
+                  <li><a>materialUsedAsObject_id</a>: Int</li>
+                  <li><a>materialUsedAsCarrier_id</a>: Int</li>
+                  <li><a>limit</a>: Int</li>
+                  <li><a>offset</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>POST</td>
           <td>/function/fetch/one</td>
           <td>Returns a function. You <b>must</b> pass the followings as body parameter:
           <ul>
@@ -113,7 +127,7 @@ docker-compose up
           <td>Returns a subset of all functions exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
                   <li><a>function_id</a>: Int</li>
-                  <li><a>type</a>: String</li>
+                  <li><a>function</a>: String</li>
                   <li><a>materialUsedAsObject_id</a>: Int</li>
                   <li><a>materialUsedAsCarrier_id</a>: Int</li>
                   <li><a>measureType</a>: String</li>

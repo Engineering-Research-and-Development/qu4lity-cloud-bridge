@@ -24,6 +24,7 @@ router.post("/engineeringBoM/fetch/one", _engineeringBoM.filterOne);
 router.post("/engineeringBoM/fetch/all", _engineeringBoM.filterAll);
 
 router.get("/function/list", _function.findAll);
+router.post("/function/list/by", _function.findByParameters);
 router.post("/function/fetch/one", _function.filterOne);
 router.post("/function/fetch/all", _function.filterAll);
 
