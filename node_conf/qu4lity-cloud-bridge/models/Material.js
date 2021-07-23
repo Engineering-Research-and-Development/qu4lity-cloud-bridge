@@ -25,6 +25,14 @@ module.exports = function(sequelize, DataTypes) {
         key: 'materialFamily_id'
       }
     },
+    property_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Property',
+        key: 'property_id'
+      }
+    },
     functionUnit_id: {
       type: DataTypes.INTEGER,
       allowNull: true
@@ -47,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "materialFamily_id" },
+        ]
+      },
+      {
+        name: "material_fk_2",
+        using: "BTREE",
+        fields: [
+          { name: "property_id" },
         ]
       },
     ]

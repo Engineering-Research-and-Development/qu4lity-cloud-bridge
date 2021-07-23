@@ -18,8 +18,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     measureType: {
-      type: DataTypes.TEXT,
-      allowNull: true
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1
     },
     dataDivisor: {
       type: DataTypes.TEXT,

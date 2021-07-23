@@ -31,9 +31,17 @@ exports.filterAll = (req, res) => {
 
   if (type){
     const typeFormatted = type.toLowerCase().charAt(0).toUpperCase() + type.toLowerCase().slice(1)
-    condition["description"] = { [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` }
-  }else
-    condition["description"] = { [Op.like]: 'DRUM LIFTER ASSEMBLY%' }
+    condition["description"] = { 
+      [Op.or]: [
+        {
+          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
+        },
+        {
+          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
+        }
+      ]
+    }
+  }
 
   if (onlyFailures)
     measureFailureCondition["measureFailure_id"] = { [Op.ne]: null }
@@ -53,7 +61,12 @@ exports.filterAll = (req, res) => {
     include: [
       {
         model: models.MeasureFailure, as: 'MeasureFailures',
-        where: measureFailureCondition
+        where: measureFailureCondition,
+        include : [
+          {
+            model: models.FailureType, as: 'FailureType'
+          }
+        ]
       },
       {
         model: models.Function_Measure, as: 'Function_Measures',

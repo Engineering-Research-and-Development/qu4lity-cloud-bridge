@@ -9,6 +9,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    productionLine_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'ProductionLine',
+        key: 'productionLine_id'
+      }
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true
@@ -36,6 +44,13 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "resource_fk_1",
+        using: "BTREE",
+        fields: [
+          { name: "productionLine_id" },
+        ]
+      },
+      {
+        name: "resource_fk_2",
         using: "BTREE",
         fields: [
           { name: "resourceType_id" },

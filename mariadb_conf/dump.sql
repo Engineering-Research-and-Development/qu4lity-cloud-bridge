@@ -3,16 +3,14 @@ USE whr_mpfq_relational;
 
 CREATE TABLE IF NOT EXISTS FailureType (
   failureType_id INT NOT NULL AUTO_INCREMENT,
-  description TEXT(64),
-  setOfSymptoms TEXT(64) NOT NULL,
-  type TEXT(32) NOT NULL,
-  name TEXT(32) NOT NULL,
+  description TEXT(64) NOT NULL,
+  note TEXT(128),
   PRIMARY KEY (failureType_id)
 );
 CREATE TABLE IF NOT EXISTS RecoveryProcedure (
   recoveryProcedure_id INT NOT NULL AUTO_INCREMENT,
   failureType_id INT NOT NULL,
-  name TEXT(32) NOT NULL,
+  description TEXT(64) NOT NULL,
   PRIMARY KEY (recoveryProcedure_id),
   CONSTRAINT recoveryProcedure_fk FOREIGN KEY (failureType_id) REFERENCES FailureType(failureType_id) ON DELETE CASCADE
 );
@@ -23,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Measure (
   measure_id INT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
   measureDimension TEXT(16),
-  measureType TEXT(16),
+  measureType INT NOT NULL DEFAULT 1, # 1 single value, 2 array value
   dataDivisor TEXT(16),
   measure_prog_id INT,
   dateTime DATETIME(3) NOT NULL,
@@ -50,17 +48,17 @@ CREATE TABLE IF NOT EXISTS MeasureFailure (
 
 CREATE TABLE IF NOT EXISTS Property (
   property_id INT NOT NULL AUTO_INCREMENT,
-  name TEXT(32) NOT NULL,
-  description TEXT(64),
+  description TEXT(64) NOT NULL,
   property1 TEXT(64),
   property2 TEXT(64),
   property3 TEXT(64),
+  property4 TEXT(64),
+  property5 TEXT(64),
   PRIMARY KEY (property_id)
 );
 CREATE TABLE IF NOT EXISTS MaterialFamily (
   materialFamily_id INT NOT NULL AUTO_INCREMENT,
-  description TEXT(64),
-  name TEXT(32) NOT NULL,
+  description TEXT(64) NOT NULL,
   PRIMARY KEY (materialFamily_id)
 );
 CREATE TABLE IF NOT EXISTS Material (
@@ -68,9 +66,11 @@ CREATE TABLE IF NOT EXISTS Material (
   description TEXT(64),
   materialModel TEXT(32),
   materialFamily_id INT,
+  property_id INT,
   functionUnit_id INT,
   PRIMARY KEY (material_id),
-  CONSTRAINT material_fk_1 FOREIGN KEY (materialFamily_id) REFERENCES MaterialFamily(materialFamily_id) ON DELETE SET NULL
+  CONSTRAINT material_fk_1 FOREIGN KEY (materialFamily_id) REFERENCES MaterialFamily(materialFamily_id) ON DELETE SET NULL,
+  CONSTRAINT material_fk_2 FOREIGN KEY (property_id) REFERENCES Property(property_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS WhirlpoolMaterial (
   whr_material_id BIGINT NOT NULL AUTO_INCREMENT,
@@ -78,13 +78,6 @@ CREATE TABLE IF NOT EXISTS WhirlpoolMaterial (
   materialRevisionECN TEXT(32),
   materialDrawingNumber TEXT(32),
   PRIMARY KEY (whr_material_id)
-);
-CREATE TABLE IF NOT EXISTS Material_Property (
-  material_id BIGINT NOT NULL,
-  property_id INT NOT NULL,
-  PRIMARY KEY (material_id, property_id),
-  CONSTRAINT material_property_fk_1 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE,
-  CONSTRAINT material_property_fk_2 FOREIGN KEY (property_id) REFERENCES Property(property_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS Material_WhirlpoolMaterial (
   material_id BIGINT NOT NULL,
@@ -123,6 +116,7 @@ CREATE TABLE IF NOT EXISTS ProductionLine (
   productionLine_id INT NOT NULL AUTO_INCREMENT,
   name TEXT(32) NOT NULL,
   description TEXT(64),
+  note TEXT(128),
   PRIMARY KEY (productionLine_id)
 );
 CREATE TABLE IF NOT EXISTS ProductionOrder (
@@ -196,7 +190,6 @@ CREATE TABLE IF NOT EXISTS Product (
 CREATE TABLE IF NOT EXISTS Operation (
   operation_id INT NOT NULL AUTO_INCREMENT,
   description TEXT(64),
-  duration INT(64),
   note TEXT(255) DEFAULT NULL,
   materialUsedAsCarrier_id BIGINT,
   materialUsedAsTarget_id BIGINT,
@@ -229,10 +222,12 @@ CREATE TABLE IF NOT EXISTS ResourceSetup (
 );
 CREATE TABLE IF NOT EXISTS Resource (
   resource_id INT NOT NULL AUTO_INCREMENT,
+  productionLine_id INT,
   description TEXT(64),
   resourceType_id INT,
   PRIMARY KEY (resource_id),
-  CONSTRAINT resource_fk_1 FOREIGN KEY (resourceType_id) REFERENCES ResourceType(resourceType_id) ON DELETE SET NULL
+  CONSTRAINT resource_fk_1 FOREIGN KEY (productionLine_id) REFERENCES ProductionLine(productionLine_id) ON DELETE SET NULL,
+  CONSTRAINT resource_fk_2 FOREIGN KEY (resourceType_id) REFERENCES ResourceType(resourceType_id) ON DELETE SET NULL
 );
 CREATE TABLE IF NOT EXISTS Resource_Measure (
   resource_id INT NOT NULL,
@@ -332,9 +327,8 @@ CREATE TABLE IF NOT EXISTS Function (
   materialUsedAsObject_id BIGINT NOT NULL,
   object TEXT(32) NOT NULL,
   PRIMARY KEY (function_id),
-  CONSTRAINT function_fk_1 FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE,
-  CONSTRAINT function_fk_2 FOREIGN KEY (materialUsedAsCarrier_id) REFERENCES Material(material_id) ON DELETE CASCADE,
-  CONSTRAINT function_fk_3 FOREIGN KEY (materialUsedAsObject_id) REFERENCES Material(material_id) ON DELETE CASCADE
+  CONSTRAINT function_fk_1 FOREIGN KEY (materialUsedAsCarrier_id) REFERENCES Material(material_id) ON DELETE CASCADE,
+  CONSTRAINT function_fk_2 FOREIGN KEY (materialUsedAsObject_id) REFERENCES Material(material_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS Function_Measure (
   function_id INT NOT NULL,
@@ -343,43 +337,50 @@ CREATE TABLE IF NOT EXISTS Function_Measure (
   CONSTRAINT function_measure_fk_1 FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE,
   CONSTRAINT function_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
 );
-
+CREATE TABLE IF NOT EXISTS Process_Function (
+  process_id INT NOT NULL,
+  function_id INT NOT NULL,
+  PRIMARY KEY (process_id, function_id),
+  CONSTRAINT process_function_fk_1 FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE,
+  CONSTRAINT process_function_fk_2 FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE
+);
 -- ---------------------------------------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS MaterialQA (
   materialQA_id INT NOT NULL AUTO_INCREMENT,
+  used INT NOT NULL DEFAULT 1, # 0 not used, 1 used
   material_id BIGINT NOT NULL,
-  type TEXT(32),
-  functionUnit_id INT,
-  qa1_drying_performance INT NOT NULL DEFAULT 0,
-  qa2_noise INT NOT NULL DEFAULT 0,
-  qa3_energy_consumption INT NOT NULL DEFAULT 0,
-  qa4_component_failure INT NOT NULL DEFAULT 0,
-  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  qa1_drying_performance DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa2_noise DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa3_energy_consumption DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa4_component_failure DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa5_perceived_quality DECIMAL(3,1) NOT NULL DEFAULT 0.0,
   PRIMARY KEY (materialQA_id),
   CONSTRAINT materialQA_fk FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS FunctionQA (
   functionQA_id INT NOT NULL AUTO_INCREMENT,
+  used INT NOT NULL DEFAULT 1, # 0 not used, 1 used
   function_id INT NOT NULL,
-  qa1_drying_performance INT NOT NULL DEFAULT 0,
-  qa2_noise INT NOT NULL DEFAULT 0,
-  qa3_energy_consumption INT NOT NULL DEFAULT 0,
-  qa4_component_failure INT NOT NULL DEFAULT 0,
-  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  qa1_drying_performance DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa2_noise DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa3_energy_consumption DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa4_component_failure DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa5_perceived_quality DECIMAL(3,1) NOT NULL DEFAULT 0.0,
   PRIMARY KEY (functionQA_id),
   CONSTRAINT functionQA_fk FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ProcessQA (
   ProcessQA_id INT NOT NULL AUTO_INCREMENT,
+  used INT NOT NULL DEFAULT 1, # 0 not used, 1 used
   process_id INT NOT NULL,
-  qa1_drying_performance INT NOT NULL DEFAULT 0,
-  qa2_noise INT NOT NULL DEFAULT 0,
-  qa3_energy_consumption INT NOT NULL DEFAULT 0,
-  qa4_component_failure INT NOT NULL DEFAULT 0,
-  qa5_perceived_quality INT NOT NULL DEFAULT 0,
+  qa1_drying_performance DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa2_noise DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa3_energy_consumption DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa4_component_failure DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  qa5_perceived_quality DECIMAL(3,1) NOT NULL DEFAULT 0.0,
   PRIMARY KEY (ProcessQA_id),
   CONSTRAINT processQA_fk FOREIGN KEY (process_id) REFERENCES Process(process_id) ON DELETE CASCADE
 );

@@ -9,13 +9,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
     description: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
     property1: {
       type: DataTypes.TEXT,
@@ -26,6 +22,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     property3: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    property4: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    property5: {
       type: DataTypes.TEXT,
       allowNull: true
     }

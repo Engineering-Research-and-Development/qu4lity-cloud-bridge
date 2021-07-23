@@ -36,6 +36,15 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
+        name: "Material_Property_material_id_property_id_unique",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "material_id" },
+          { name: "property_id" },
+        ]
+      },
+      {
         name: "material_property_fk_2",
         using: "BTREE",
         fields: [

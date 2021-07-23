@@ -2,28 +2,28 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('RecoveryProcedure', {
-    recoveryProcedure_id: {
-      autoIncrement: true,
+  return sequelize.define('Process_Function', {
+    process_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
-    },
-    failureType_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'FailureType',
-        key: 'failureType_id'
+        model: 'Process',
+        key: 'process_id'
       }
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    function_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Function',
+        key: 'function_id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'RecoveryProcedure',
+    tableName: 'Process_Function',
     timestamps: false,
     indexes: [
       {
@@ -31,14 +31,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "recoveryProcedure_id" },
+          { name: "process_id" },
+          { name: "function_id" },
         ]
       },
       {
-        name: "recoveryProcedure_fk",
+        name: "process_function_fk_2",
         using: "BTREE",
         fields: [
-          { name: "failureType_id" },
+          { name: "function_id" },
         ]
       },
     ]

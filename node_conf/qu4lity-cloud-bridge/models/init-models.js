@@ -22,6 +22,7 @@ var _Process = require("./Process");
 var _ProcessFailure = require("./ProcessFailure");
 var _ProcessQA = require("./ProcessQA");
 var _ProcessType = require("./ProcessType");
+var _Process_Function = require("./Process_Function");
 var _Process_ProcessFailure = require("./Process_ProcessFailure");
 var _Product = require("./Product");
 var _ProductionLine = require("./ProductionLine");
@@ -63,6 +64,7 @@ function initModels(sequelize) {
   var ProcessFailure = _ProcessFailure(sequelize, DataTypes);
   var ProcessQA = _ProcessQA(sequelize, DataTypes);
   var ProcessType = _ProcessType(sequelize, DataTypes);
+  var Process_Function = _Process_Function(sequelize, DataTypes);
   var Process_ProcessFailure = _Process_ProcessFailure(sequelize, DataTypes);
   var Product = _Product(sequelize, DataTypes);
   var ProductionLine = _ProductionLine(sequelize, DataTypes);
@@ -92,6 +94,8 @@ function initModels(sequelize) {
   Material.belongsToMany(Property, { through: Material_Property, foreignKey: "material_id", otherKey: "property_id" });
   WhirlpoolMaterial.belongsToMany(Material, { through: Material_WhirlpoolMaterial, foreignKey: "whr_material_id", otherKey: "material_id" });
   Material.belongsToMany(WhirlpoolMaterial, { through: Material_WhirlpoolMaterial, foreignKey: "material_id", otherKey: "whr_material_id" });
+  Function.belongsToMany(Process, { through: Process_Function, foreignKey: "function_id", otherKey: "process_id" });
+  Process.belongsToMany(Function, { through: Process_Function, foreignKey: "process_id", otherKey: "function_id" });
   ProcessFailure.belongsToMany(Process, { through: Process_ProcessFailure, foreignKey: "processFailure_id", otherKey: "process_id" });
   Process.belongsToMany(ProcessFailure, { through: Process_ProcessFailure, foreignKey: "process_id", otherKey: "processFailure_id" });
   Measure.belongsToMany(Resource, { through: Resource_Measure, foreignKey: "measure_id", otherKey: "resource_id" });
@@ -104,8 +108,6 @@ function initModels(sequelize) {
   EngineeringBoM.hasMany(EngineeringBoM_Material, { foreignKey: "engineeringBoM_id"});
   EngineeringBoM_Material.belongsTo(Material, { foreignKey: "material_id"});
   Material.hasMany(EngineeringBoM_Material, { foreignKey: "material_id"});
-  Function.belongsTo(Process, { foreignKey: "process_id"});
-  Process.hasMany(Function, { foreignKey: "process_id"});
   Function.belongsTo(Material, { foreignKey: "materialUsedAsCarrier_id"});
   Material.hasMany(Function, { foreignKey: "materialUsedAsCarrier_id"});
   Function.belongsTo(Material, { foreignKey: "materialUsedAsObject_id"});
@@ -130,6 +132,8 @@ function initModels(sequelize) {
   Operation.hasMany(JournalDetails_Operation, { foreignKey: "operation_id"});
   Material.belongsTo(MaterialFamily, { foreignKey: "materialFamily_id"});
   MaterialFamily.hasMany(Material, { foreignKey: "materialFamily_id"});
+  Material.belongsTo(Property, { foreignKey: "property_id"});
+  Property.hasMany(Material, { foreignKey: "property_id"});
   MaterialQA.belongsTo(Material, { foreignKey: "material_id"});
   Material.hasMany(MaterialQA, { foreignKey: "material_id"});
   Material_Measure.belongsTo(Material, { foreignKey: "material_id"});
@@ -148,12 +152,12 @@ function initModels(sequelize) {
   Measure.hasMany(MeasureFailure, { foreignKey: "measure_id"});
   MeasureFailure.belongsTo(FailureType, { foreignKey: "failureType_id"});
   FailureType.hasMany(MeasureFailure, { foreignKey: "failureType_id"});
-  Operation.belongsTo(Material, { as:"MaterialUsedAsCarrier", foreignKey: "materialUsedAsCarrier_id"});
-  Material.hasMany(Operation, { as:"MaterialUsedAsCarrier", foreignKey: "materialUsedAsCarrier_id"});
-  Operation.belongsTo(Material, { as:"MaterialUsedAsTarget", foreignKey: "materialUsedAsTarget_id"});
-  Material.hasMany(Operation, { as:"MaterialUsedAsTarget", foreignKey: "materialUsedAsTarget_id"});
-  Operation.belongsTo(Material, { as:"MaterialTransformation", foreignKey: "materialTransformation_id"});
-  Material.hasMany(Operation, { as:"MaterialTransformation", foreignKey: "materialTransformation_id"});
+  Operation.belongsTo(Material, { foreignKey: "materialUsedAsCarrier_id"});
+  Material.hasMany(Operation, { foreignKey: "materialUsedAsCarrier_id"});
+  Operation.belongsTo(Material, { foreignKey: "materialUsedAsTarget_id"});
+  Material.hasMany(Operation, { foreignKey: "materialUsedAsTarget_id"});
+  Operation.belongsTo(Material, { foreignKey: "materialTransformation_id"});
+  Material.hasMany(Operation, { foreignKey: "materialTransformation_id"});
   Process.belongsTo(Location, { foreignKey: "location_id"});
   Location.hasMany(Process, { foreignKey: "location_id"});
   Process.belongsTo(State, { foreignKey: "state_id"});
@@ -168,6 +172,10 @@ function initModels(sequelize) {
   FailureType.hasMany(ProcessFailure, { foreignKey: "failureType_id"});
   ProcessQA.belongsTo(Process, { foreignKey: "process_id"});
   Process.hasMany(ProcessQA, { foreignKey: "process_id"});
+  Process_Function.belongsTo(Process, { foreignKey: "process_id"});
+  Process.hasMany(Process_Function, { foreignKey: "process_id"});
+  Process_Function.belongsTo(Function, { foreignKey: "function_id"});
+  Function.hasMany(Process_Function, { foreignKey: "function_id"});
   Process_ProcessFailure.belongsTo(Process, { foreignKey: "process_id"});
   Process.hasMany(Process_ProcessFailure, { foreignKey: "process_id"});
   Process_ProcessFailure.belongsTo(ProcessFailure, { foreignKey: "processFailure_id"});
@@ -180,6 +188,8 @@ function initModels(sequelize) {
   ProductionLine.hasMany(ProductionOrder, { foreignKey: "productionLine_id"});
   RecoveryProcedure.belongsTo(FailureType, { foreignKey: "failureType_id"});
   FailureType.hasMany(RecoveryProcedure, { foreignKey: "failureType_id"});
+  Resource.belongsTo(ProductionLine, { foreignKey: "productionLine_id"});
+  ProductionLine.hasMany(Resource, { foreignKey: "productionLine_id"});
   Resource.belongsTo(ResourceType, { foreignKey: "resourceType_id"});
   ResourceType.hasMany(Resource, { foreignKey: "resourceType_id"});
   ResourceFailure.belongsTo(FailureType, { foreignKey: "failureType_id"});
@@ -221,6 +231,7 @@ function initModels(sequelize) {
     ProcessFailure,
     ProcessQA,
     ProcessType,
+    Process_Function,
     Process_ProcessFailure,
     Product,
     ProductionLine,

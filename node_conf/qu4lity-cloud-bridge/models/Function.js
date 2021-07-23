@@ -11,11 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     process_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'Process',
-        key: 'process_id'
-      }
+      allowNull: true
     },
     description: {
       type: DataTypes.TEXT,
@@ -63,10 +59,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "function_fk_1",
+        name: "function_fk_3",
         using: "BTREE",
         fields: [
-          { name: "process_id" },
+          { name: "materialUsedAsObject_id" },
         ]
       },
       {
@@ -77,10 +73,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "function_fk_3",
+        name: "function_fk_1",
         using: "BTREE",
         fields: [
-          { name: "materialUsedAsObject_id" },
+          { name: "process_id" },
         ]
       },
     ]

@@ -9,6 +9,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    used: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1
+    },
     function_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -18,29 +23,29 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     qa1_drying_performance: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(3,1),
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0.0
     },
     qa2_noise: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(3,1),
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0.0
     },
     qa3_energy_consumption: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(3,1),
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0.0
     },
     qa4_component_failure: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(3,1),
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0.0
     },
     qa5_perceived_quality: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(3,1),
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0.0
     }
   }, {
     sequelize,
