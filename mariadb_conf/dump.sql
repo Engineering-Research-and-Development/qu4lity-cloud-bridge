@@ -319,7 +319,6 @@ CREATE TABLE IF NOT EXISTS Process_ProcessFailure (
 
 CREATE TABLE IF NOT EXISTS Function (
   function_id INT NOT NULL AUTO_INCREMENT,
-  process_id INT,
   description TEXT(32),
   materialUsedAsCarrier_id BIGINT NOT NULL,
   carrier TEXT(32) NOT NULL,

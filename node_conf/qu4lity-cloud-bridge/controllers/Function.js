@@ -41,7 +41,7 @@ exports.findByParameters = (req, res) => {
   models.Function.findAll({
     include: [
       {
-        model: models.Process, as: 'Process'
+        model: models.Process, as: 'Processes'
       }
     ],
     where: condition,
@@ -126,7 +126,7 @@ exports.filterAll = (req, res) => {
   models.Function.findAll({
     include: [
       {
-        model: models.Process, as: 'Process'
+        model: models.Process, as: 'Processes'
       },
       {
         model: models.Measure, as: 'Measures',

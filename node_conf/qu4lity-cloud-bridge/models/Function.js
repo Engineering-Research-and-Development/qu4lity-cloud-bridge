@@ -9,10 +9,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    process_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true
@@ -59,24 +55,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "function_fk_3",
+        name: "function_fk_2",
         using: "BTREE",
         fields: [
           { name: "materialUsedAsObject_id" },
         ]
       },
       {
-        name: "function_fk_2",
-        using: "BTREE",
-        fields: [
-          { name: "materialUsedAsCarrier_id" },
-        ]
-      },
-      {
         name: "function_fk_1",
         using: "BTREE",
         fields: [
-          { name: "process_id" },
+          { name: "materialUsedAsCarrier_id" },
         ]
       },
     ]
