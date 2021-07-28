@@ -3,7 +3,7 @@ const Op = Sequelize.Op;
 const models = require("../models").models
 
 exports.findAll = (req, res) => {
-    models.functionQA.findAll()
+    models.FunctionQA.findAll()
         .then(data => {
             res.send(data);
         })
@@ -18,7 +18,7 @@ exports.findAll = (req, res) => {
 exports.filterOne = (req, res) => {
     const function_id = req.body.function_id;
 
-    models.functionQA.findOne({
+    models.FunctionQA.findOne({
         include: [
             {
                 model: models.Function, as: 'Function',
