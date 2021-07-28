@@ -1,18 +1,21 @@
 const router = require('express').Router();
 
-const _drumSensor = require("../../controllers/DrumSensor.js");
-const _drumTest = require("../../controllers/DrumTest.js");
-const _engineeringBoM = require("../../controllers/EngineeringBoM.js");
-const _function = require("../../controllers/Function.js");
-const _journal = require("../../controllers/Journal.js");
-const _journalDetail = require("../../controllers/JournalDetail.js");
-const _material = require("../../controllers/Material.js");
-const _operation = require("../../controllers/Operation.js");
-const _process = require("../../controllers/Process.js");
-const _productionLine = require("../../controllers/ProductionLine.js");
-const _station = require("../../controllers/Station.js");
-const _resource = require("../../controllers/Resource.js");
-const _whr_material = require("../../controllers/WhirlpoolMaterial.js");
+const _drumSensor = require("../../controllers/drumSensor.js");
+const _drumTest = require("../../controllers/drumTest.js");
+const _engineeringBoM = require("../../controllers/engineeringBoM.js");
+const _function = require("../../controllers/function.js");
+const _functionQA = require("../../controllers/functionQA.js");
+const _journal = require("../../controllers/journal.js");
+const _journalDetail = require("../../controllers/journalDetail.js");
+const _material = require("../../controllers/material.js");
+const _materialQA = require("../../controllers/materialQA.js");
+const _operation = require("../../controllers/operation.js");
+const _process = require("../../controllers/process.js");
+const _processQA = require("../../controllers/processQA.js");
+const _productionLine = require("../../controllers/productionLine.js");
+const _station = require("../../controllers/station.js");
+const _resource = require("../../controllers/resource.js");
+const _whr_material = require("../../controllers/whirlpoolMaterial.js");
 
 router.post("/drum/sensor/fetch/one", _drumSensor.filterOne);
 router.post("/drum/sensor/fetch/all", _drumSensor.filterAll);
@@ -28,6 +31,9 @@ router.post("/function/list/by", _function.findByParameters);
 router.post("/function/fetch/one", _function.filterOne);
 router.post("/function/fetch/all", _function.filterAll);
 
+router.get("/functionQA/list", _functionQA.findAll);
+router.post("/functionQA/fetch/one", _functionQA.filterOne);
+
 router.get("/journal/list", _journal.findAll);
 router.post("/journal/fetch/one", _journal.filterOne);
 router.post("/journal/fetch/all", _journal.filterAll);
@@ -40,9 +46,15 @@ router.get("/material/list", _material.findAll);
 router.post("/material/fetch/one", _material.filterOne);
 router.post("/material/fetch/all", _material.filterAll);
 
+router.get("/materialQA/list", _materialQA.findAll);
+router.post("/materialQA/fetch/one", _materialQA.filterOne);
+
 router.get("/process/list", _process.findAll);
 router.post("/process/fetch/one", _process.filterOne);
 router.post("/process/fetch/all", _process.filterAll);
+
+router.get("/processQA/list", _processQA.findAll);
+router.post("/processQA/fetch/one", _processQA.filterOne);
 
 router.get("/operation/list", _operation.findAll);
 router.post("/operation/fetch/one", _operation.filterOne);

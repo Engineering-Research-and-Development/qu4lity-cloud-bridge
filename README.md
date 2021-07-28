@@ -140,6 +140,19 @@ docker-compose up
       </tr>
       <tr>
           <td>GET</td>
+          <td>/functionQA/list</td>
+          <td>Returns all functionQAs</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/functionQA/fetch/one</td>
+          <td>Returns a functionQA. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>function_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>GET</td>
           <td>/journal/list</td>
           <td>Returns all journals</td>
       </tr>
@@ -215,6 +228,19 @@ docker-compose up
       </tr>
       <tr>
           <td>GET</td>
+          <td>/materialQA/list</td>
+          <td>Returns all materialQAs</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/materialQA/fetch/one</td>
+          <td>Returns a materialQA. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>material_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>GET</td>
           <td>/operation/list</td>
           <td>Returns all operations</td>
       </tr>
@@ -247,6 +273,19 @@ docker-compose up
           <td>POST</td>
           <td>/process/fetch/one</td>
           <td>Returns a process. You <b>must</b> pass the followings as body parameter:
+          <ul>
+              <li><a>process_id</a>: Int</li>
+          </ul>
+      </tr>
+      <tr>
+          <td>GET</td>
+          <td>/processQA/list</td>
+          <td>Returns all processQAs</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/processQA/fetch/one</td>
+          <td>Returns a processQA. You <b>must</b> pass the followings as body parameter:
           <ul>
               <li><a>process_id</a>: Int</li>
           </ul>
@@ -342,7 +381,7 @@ docker-compose up
     </tbody>
 </table>
 
-You can download an example of Postman collection [here](docs/postman_collection.json)
+You can download an example of Insomnia collection [here](docs/insomnia_collection.json)
 
 
 N.B **nginx** is configured to use **Basic authentication**, please remember either to configure it properly in _'nginx_conf'_ folder or to include the authorization header in your HTTP request as shown in the following example
