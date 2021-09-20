@@ -5,6 +5,7 @@ var _FailureType = require("./FailureType");
 var _Function = require("./Function");
 var _FunctionQA = require("./FunctionQA");
 var _Function_Measure = require("./Function_Measure");
+var _Function_MeasureType = require("./Function_MeasureType");
 var _Journal = require("./Journal");
 var _JournalDetails = require("./JournalDetails");
 var _JournalDetails_Operation = require("./JournalDetails_Operation");
@@ -13,6 +14,7 @@ var _Material = require("./Material");
 var _MaterialFamily = require("./MaterialFamily");
 var _MaterialQA = require("./MaterialQA");
 var _Material_Measure = require("./Material_Measure");
+var _Material_MeasureType = require("./Material_MeasureType");
 var _Material_Property = require("./Material_Property");
 var _Material_WhirlpoolMaterial = require("./Material_WhirlpoolMaterial");
 var _Measure = require("./Measure");
@@ -34,6 +36,7 @@ var _ResourceFailure = require("./ResourceFailure");
 var _ResourceSetup = require("./ResourceSetup");
 var _ResourceType = require("./ResourceType");
 var _Resource_Measure = require("./Resource_Measure");
+var _Resource_MeasureType = require("./Resource_MeasureType");
 var _Resource_ResourceFailure = require("./Resource_ResourceFailure");
 var _Resource_ResourceSetup = require("./Resource_ResourceSetup");
 var _State = require("./State");
@@ -47,6 +50,7 @@ function initModels(sequelize) {
   var Function = _Function(sequelize, DataTypes);
   var FunctionQA = _FunctionQA(sequelize, DataTypes);
   var Function_Measure = _Function_Measure(sequelize, DataTypes);
+  var Function_MeasureType = _Function_MeasureType(sequelize, DataTypes);
   var Journal = _Journal(sequelize, DataTypes);
   var JournalDetails = _JournalDetails(sequelize, DataTypes);
   var JournalDetails_Operation = _JournalDetails_Operation(sequelize, DataTypes);
@@ -55,6 +59,7 @@ function initModels(sequelize) {
   var MaterialFamily = _MaterialFamily(sequelize, DataTypes);
   var MaterialQA = _MaterialQA(sequelize, DataTypes);
   var Material_Measure = _Material_Measure(sequelize, DataTypes);
+  var Material_MeasureType = _Material_MeasureType(sequelize, DataTypes);
   var Material_Property = _Material_Property(sequelize, DataTypes);
   var Material_WhirlpoolMaterial = _Material_WhirlpoolMaterial(sequelize, DataTypes);
   var Measure = _Measure(sequelize, DataTypes);
@@ -76,6 +81,7 @@ function initModels(sequelize) {
   var ResourceSetup = _ResourceSetup(sequelize, DataTypes);
   var ResourceType = _ResourceType(sequelize, DataTypes);
   var Resource_Measure = _Resource_Measure(sequelize, DataTypes);
+  var Resource_MeasureType = _Resource_MeasureType(sequelize, DataTypes);
   var Resource_ResourceFailure = _Resource_ResourceFailure(sequelize, DataTypes);
   var Resource_ResourceSetup = _Resource_ResourceSetup(sequelize, DataTypes);
   var State = _State(sequelize, DataTypes);
@@ -118,6 +124,8 @@ function initModels(sequelize) {
   Function.hasMany(Function_Measure, { foreignKey: "function_id"});
   Function_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
   Measure.hasMany(Function_Measure, { foreignKey: "measure_id"});
+  Function_MeasureType.belongsTo(Function, { foreignKey: "function_id"});
+  Function.hasMany(Function_MeasureType, { foreignKey: "function_id"});
   Journal.belongsTo(ProductionOrder, { foreignKey: "productionOrder_id"});
   ProductionOrder.hasMany(Journal, { foreignKey: "productionOrder_id"});
   Journal.belongsTo(ProductionLine, { foreignKey: "productionLine_id"});
@@ -140,6 +148,8 @@ function initModels(sequelize) {
   Material.hasMany(Material_Measure, { foreignKey: "material_id"});
   Material_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
   Measure.hasMany(Material_Measure, { foreignKey: "measure_id"});
+  Material_MeasureType.belongsTo(Material, { foreignKey: "material_id"});
+  Material.hasMany(Material_MeasureType, { foreignKey: "material_id"});
   Material_Property.belongsTo(Material, { foreignKey: "material_id"});
   Material.hasMany(Material_Property, { foreignKey: "material_id"});
   Material_Property.belongsTo(Property, { foreignKey: "property_id"});
@@ -198,6 +208,8 @@ function initModels(sequelize) {
   Resource.hasMany(Resource_Measure, { foreignKey: "resource_id"});
   Resource_Measure.belongsTo(Measure, { foreignKey: "measure_id"});
   Measure.hasMany(Resource_Measure, { foreignKey: "measure_id"});
+  Resource_MeasureType.belongsTo(Resource, { foreignKey: "resource_id"});
+  Resource.hasMany(Resource_MeasureType, { foreignKey: "resource_id"});
   Resource_ResourceFailure.belongsTo(Resource, { foreignKey: "resource_id"});
   Resource.hasMany(Resource_ResourceFailure, { foreignKey: "resource_id"});
   Resource_ResourceFailure.belongsTo(ResourceFailure, { foreignKey: "resourceFailure_id"});
@@ -214,6 +226,7 @@ function initModels(sequelize) {
     Function,
     FunctionQA,
     Function_Measure,
+    Function_MeasureType,
     Journal,
     JournalDetails,
     JournalDetails_Operation,
@@ -222,6 +235,7 @@ function initModels(sequelize) {
     MaterialFamily,
     MaterialQA,
     Material_Measure,
+    Material_MeasureType,
     Material_Property,
     Material_WhirlpoolMaterial,
     Measure,
@@ -243,6 +257,7 @@ function initModels(sequelize) {
     ResourceSetup,
     ResourceType,
     Resource_Measure,
+    Resource_MeasureType,
     Resource_ResourceFailure,
     Resource_ResourceSetup,
     State,

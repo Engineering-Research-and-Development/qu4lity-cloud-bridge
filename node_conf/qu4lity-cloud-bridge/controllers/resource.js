@@ -44,18 +44,9 @@ exports.filterAll = (req, res) => {
     condition["resource_id"] = { [Op.eq]: resource_id }
 
   var measureCondition = {}
+  
   if (measureType){
-    const typeFormatted = measureType.toLowerCase().charAt(0).toUpperCase() + measureType.toLowerCase().slice(1)
-    measureCondition["description"] = { 
-      [Op.or]: [
-        {
-          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
-        },
-        {
-          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
-        }
-      ]
-    }
+    measureCondition["description"] = { [Op.eq]: `${measureType}` }
   }
 
   if (from && to)
@@ -90,3 +81,23 @@ exports.filterAll = (req, res) => {
       });
     });
 };
+
+exports.filterMeasureType = (req, res) => {
+  const resource_id = req.body.resource_id;
+ 
+  models.Resource_MeasureType.findAll({
+    where: {
+      "resource_id": { [Op.eq]: `${resource_id}` }
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+        err.message || "Some error occurred while retrieving MeasureTypes of Resources."
+      });
+    });
+};
+

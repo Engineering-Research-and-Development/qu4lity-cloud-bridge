@@ -45,17 +45,7 @@ exports.filterAll = (req, res) => {
   var measureCondition = {}
 
   if (measureType){
-    const typeFormatted = measureType.toLowerCase().charAt(0).toUpperCase() + measureType.toLowerCase().slice(1)
-    measureCondition["description"] = { 
-      [Op.or]: [
-        {
-          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
-        },
-        {
-          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
-        }
-      ]
-    }
+    measureCondition["description"] = { [Op.eq]: `${measureType}` }
   }
 
   if (from && to)
@@ -89,6 +79,25 @@ exports.filterAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving Materials."
+      });
+    });
+};
+
+exports.filterMeasureType = (req, res) => {
+  const material_id = req.body.material_id;
+ 
+  models.Material_MeasureType.findAll({
+    where: {
+      "material_id": { [Op.eq]: `${material_id}` }
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving MeasureTypes of Materials."
       });
     });
 };

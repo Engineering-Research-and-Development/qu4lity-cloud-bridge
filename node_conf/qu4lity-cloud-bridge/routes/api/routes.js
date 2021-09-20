@@ -30,6 +30,7 @@ router.get("/function/list", _function.findAll);
 router.post("/function/list/by", _function.findByParameters);
 router.post("/function/fetch/one", _function.filterOne);
 router.post("/function/fetch/all", _function.filterAll);
+router.post("/function/fetch/measureType", _function.filterMeasureType);
 
 router.get("/functionQA/list", _functionQA.findAll);
 router.post("/functionQA/fetch/one", _functionQA.filterOne);
@@ -45,6 +46,7 @@ router.post("/journalDetails/fetch/all", _journalDetail.filterAll);
 router.get("/material/list", _material.findAll);
 router.post("/material/fetch/one", _material.filterOne);
 router.post("/material/fetch/all", _material.filterAll);
+router.post("/material/fetch/measureType", _material.filterMeasureType);
 
 router.get("/materialQA/list", _materialQA.findAll);
 router.post("/materialQA/fetch/one", _materialQA.filterOne);
@@ -69,6 +71,7 @@ router.post("/productionOrder/fetch/one", _productionLine.filterOne);
 router.get("/resource/list", _resource.findAll);
 router.post("/resource/fetch/one", _resource.filterOne);
 router.post("/resource/fetch/all", _resource.filterAll);
+router.post("/resource/fetch/measureType", _resource.filterMeasureType);
 
 router.get("/station/list", _station.findAll);
 router.post("/station/fetch/one", _station.filterOne);

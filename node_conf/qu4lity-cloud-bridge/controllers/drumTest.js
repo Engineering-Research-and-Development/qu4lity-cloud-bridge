@@ -30,17 +30,7 @@ exports.filterAll = (req, res) => {
   var measureFailureCondition = {}
 
   if (type){
-    const typeFormatted = type.toLowerCase().charAt(0).toUpperCase() + type.toLowerCase().slice(1)
-    condition["description"] = { 
-      [Op.or]: [
-        {
-          [Op.like]: `DRUM LIFTER ASSEMBLY ${typeFormatted}%` 
-        },
-        {
-          [Op.like]: `DRUM DIMENSIONAL CHECK ${typeFormatted}%` 
-        }
-      ]
-    }
+    condition["description"] = { [Op.eq]: `${measureType}` } 
   }
 
   if (onlyFailures)
