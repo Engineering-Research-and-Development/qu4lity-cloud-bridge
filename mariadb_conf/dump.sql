@@ -93,7 +93,12 @@ CREATE TABLE IF NOT EXISTS Material_Measure (
   CONSTRAINT material_Measure_fk_1 FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE,
   CONSTRAINT material_Measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
 );
-
+CREATE TABLE IF NOT EXISTS Material_MeasureType (
+  material_id BIGINT NOT NULL,
+  measureType VARCHAR(64) NOT NULL,
+  PRIMARY KEY (material_id, measureType),
+  CONSTRAINT material_measureType_fk FOREIGN KEY (material_id) REFERENCES Material(material_id) ON DELETE CASCADE
+);
 -- ---------------------------------------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS EngineeringBoM (
@@ -236,6 +241,12 @@ CREATE TABLE IF NOT EXISTS Resource_Measure (
   CONSTRAINT resource_measure_fk_1 FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE,
   CONSTRAINT resource_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
 );
+CREATE TABLE IF NOT EXISTS Resource_MeasureType (
+  resource_id INT NOT NULL,
+  measureType VARCHAR(64) NOT NULL,
+  PRIMARY KEY (resource_id, measureType),
+  CONSTRAINT resource_measureType_fk FOREIGN KEY (resource_id) REFERENCES Resource(resource_id) ON DELETE CASCADE
+);
 CREATE TABLE IF NOT EXISTS Resource_ResourceSetup (
   resource_id INT NOT NULL,
   resourceSetup_id INT NOT NULL,
@@ -335,6 +346,12 @@ CREATE TABLE IF NOT EXISTS Function_Measure (
   PRIMARY KEY (function_id, measure_id),
   CONSTRAINT function_measure_fk_1 FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE,
   CONSTRAINT function_measure_fk_2 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS Function_MeasureType (
+  function_id INT NOT NULL,
+  measureType VARCHAR(64) NOT NULL,
+  PRIMARY KEY (function_id, measureType),
+  CONSTRAINT function_measureType_fk FOREIGN KEY (function_id) REFERENCES Function(function_id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS Process_Function (
   process_id INT NOT NULL,
