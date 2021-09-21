@@ -19,7 +19,7 @@ exports.filterOne = (req, res) => {
 
 exports.filterAll = (req, res) => {
   const onlyFailures = req.body.onlyFailures
-  const type = req.body.type;
+  const measureType = req.body.type;
   const from = req.body.from;
   const to = req.body.to;
   const limit = req.body.limit;
@@ -29,7 +29,7 @@ exports.filterAll = (req, res) => {
   var condition = {}
   var measureFailureCondition = {}
 
-  if (type){
+  if (measureType){
     condition["description"] = { [Op.eq]: `${measureType}` } 
   }
 

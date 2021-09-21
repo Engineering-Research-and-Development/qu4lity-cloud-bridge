@@ -61,7 +61,7 @@ docker-compose up
           <td>/drum/test/fetch/all</td>
           <td>Returns all drum test measures. You can pass the followings as body parameter:
               <ul>
-                  <li><a>type</a>: String</li>
+                  <li><a>type</a>: String - MANDATORY</li>
                   <li><a>onlyFailures</a>: Bool</li>
                   <li><a>from</a>: Date</li>
                   <li><a>to</a>: Date</li>
@@ -80,7 +80,7 @@ docker-compose up
           <td>/engineeringBoM/fetch/one</td>
           <td>Returns an engineeringBoM. You <b>must</b> pass the followings as body parameter:
               <ul>
-                  <li><a>engineeringBoM_id</a>: Int</li>
+                  <li><a>engineeringBoM_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -89,7 +89,7 @@ docker-compose up
           <td>/engineeringBoM/fetch/all</td>
           <td>Returns a subset of all engineeringBoMs exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                  <li><a>engineeringBoM_id</a>: Int</li>
+                  <li><a>engineeringBoM_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -103,7 +103,7 @@ docker-compose up
           <td>/function/list/by</td>
           <td>Returns a subset of functions. You can pass the followings as body parameter:
               <ul>
-                  <li><a>function_id</a>: Int</li>
+                  <li><a>function_id</a>: Int - MANDATORY</li>
                   <li><a>function</a>: String</li>
                   <li><a>materialUsedAsObject_id</a>: Int</li>
                   <li><a>materialUsedAsCarrier_id</a>: Int</li>
@@ -117,7 +117,7 @@ docker-compose up
           <td>/function/fetch/one</td>
           <td>Returns a function. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>function_id</a>: Int</li>
+              <li><a>function_id</a>: Int - MANDATORY</li>
           </ul>
       </td>
       </tr>
@@ -126,7 +126,7 @@ docker-compose up
           <td>/function/fetch/all</td>
           <td>Returns a subset of all functions exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                  <li><a>function_id</a>: Int</li>
+                  <li><a>function_id</a>: Int - MANDATORY</li>
                   <li><a>function</a>: String</li>
                   <li><a>materialUsedAsObject_id</a>: Int</li>
                   <li><a>materialUsedAsCarrier_id</a>: Int</li>
@@ -135,6 +135,15 @@ docker-compose up
                   <li><a>to</a>: Date</li>
                   <li><a>limit</a>: Int</li>
                   <li><a>offset</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/function/fetch/measureType</td>
+          <td>Returns measure types for functions. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>function_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -148,7 +157,7 @@ docker-compose up
           <td>/functionQA/fetch/one</td>
           <td>Returns a functionQA. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>function_id</a>: Int</li>
+              <li><a>function_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -161,7 +170,7 @@ docker-compose up
           <td>/journal/fetch/one</td>
           <td>Returns a journal. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>journal_id</a>: Int</li>
+              <li><a>journal_id</a>: Int - MANDATORY</li>
           </ul>
       </td>
       </tr>
@@ -170,7 +179,7 @@ docker-compose up
           <td>/journal/fetch/all</td>
           <td>Returns a subset of all journals exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>journal_id</a>: Int</li>
+                <li><a>journal_id</a>: Int - MANDATORY</li>
                 <li><a>productionOrder_id</a>: Int</li>
               </ul>
           </td>
@@ -185,7 +194,7 @@ docker-compose up
           <td>/journalDetails/fetch/one</td>
           <td>Returns a journalDetails. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>journalDetails_id</a>: Int</li>
+              <li><a>journalDetails_id</a>: Int - MANDATORY</li>
           </ul>
       </td>
       </tr>
@@ -194,7 +203,7 @@ docker-compose up
           <td>/journalDetails/fetch/all</td>
           <td>Returns a subset of all journalDetails exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>journalDetails_id</a>: Int</li>
+                <li><a>journalDetails_id</a>: Int - MANDATORY</li>
                 <li><a>productionOrder_id</a>: Int</li>
               </ul>
           </td>
@@ -209,7 +218,7 @@ docker-compose up
           <td>/material/fetch/one</td>
           <td>Returns a material. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>material_id</a>: Int</li>
+              <li><a>material_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -217,12 +226,21 @@ docker-compose up
           <td>/material/fetch/all</td>
           <td>Returns a subset of all materials exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>material_id</a>: Int</li>
+                <li><a>material_id</a>: Int - MANDATORY</li>
                 <li><a>measureType</a>: String</li>
                 <li><a>from</a>: Date</li>
                 <li><a>to</a>: Date</li>
                 <li><a>limit</a>: Int</li>
                 <li><a>offset</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/material/fetch/measureType</td>
+          <td>Returns measure types for materials. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>material_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -236,7 +254,7 @@ docker-compose up
           <td>/materialQA/fetch/one</td>
           <td>Returns a materialQA. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>material_id</a>: Int</li>
+              <li><a>material_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -249,7 +267,7 @@ docker-compose up
           <td>/operation/fetch/one</td>
           <td>Returns an operation. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>operation_id</a>: Int</li>
+              <li><a>operation_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -257,7 +275,7 @@ docker-compose up
           <td>/operation/fetch/all</td>
           <td>Returns a subset of all operations exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>operation_id</a>: Int</li>
+                <li><a>operation_id</a>: Int - MANDATORY</li>
                 <li><a>materialUsedAsObject_id</a>: Int</li>
                 <li><a>materialUsedAsTarget_id</a>: Int</li>
                 <li><a>materialTransformation_id</a>: Int</li>
@@ -274,7 +292,7 @@ docker-compose up
           <td>/process/fetch/one</td>
           <td>Returns a process. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>process_id</a>: Int</li>
+              <li><a>process_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -287,7 +305,7 @@ docker-compose up
           <td>/processQA/fetch/one</td>
           <td>Returns a processQA. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>process_id</a>: Int</li>
+              <li><a>process_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -295,7 +313,7 @@ docker-compose up
           <td>/process/fetch/all</td>
           <td>Returns a subset of all processes exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>process_id</a>: Int</li>
+                <li><a>process_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -309,7 +327,7 @@ docker-compose up
           <td>/productionLine/fetch/one</td>
           <td>Returns a productionLine. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>productionLine_id</a>: Int</li>
+              <li><a>productionLine_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -322,7 +340,7 @@ docker-compose up
           <td>/productionOrder/fetch/one</td>
           <td>Returns a productionOrder. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>productionOrder_id</a>: Int</li>
+              <li><a>productionOrder_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -335,7 +353,7 @@ docker-compose up
           <td>/resource/fetch/one</td>
           <td>Returns a resource. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>resource_id</a>: Int</li>
+              <li><a>resource_id</a>: Int - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -343,12 +361,21 @@ docker-compose up
           <td>/resource/fetch/all</td>
           <td>Returns a subset of all resources exploding the nested inclusions. You can pass the followings as body parameter:
               <ul>
-                <li><a>resource_id</a>: Int</li>
+                <li><a>resource_id</a>: Int - MANDATORY</li>
                 <li><a>measureType</a>: String</li>
                 <li><a>from</a>: Date</li>
                 <li><a>to</a>: Date</li>
                 <li><a>limit</a>: Int</li>
                 <li><a>offset</a>: Int</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>/resource/fetch/measureType</td>
+          <td>Returns measure types for resources. You can pass the followings as body parameter:
+              <ul>
+                  <li><a>resource_id</a>: Int - MANDATORY</li>
               </ul>
           </td>
       </tr>
@@ -362,7 +389,7 @@ docker-compose up
           <td>/station/fetch/one</td>
           <td>Returns a station. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>station_id</a>: Int</li>
+              <li><a>station_id</a>: Int  - MANDATORY</li>
           </ul>
       </tr>
       <tr>
@@ -375,7 +402,7 @@ docker-compose up
           <td>/whr_material/fetch/one</td>
           <td>Returns a whr_material. You <b>must</b> pass the followings as body parameter:
           <ul>
-              <li><a>whr_material_id</a>: Int</li>
+              <li><a>whr_material_id</a>: Int  - MANDATORY</li>
           </ul>
       </tr>
     </tbody>
