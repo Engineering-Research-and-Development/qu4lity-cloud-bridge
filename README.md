@@ -209,6 +209,15 @@ docker-compose up
           </td>
       </tr>
       <tr>
+          <td>POST</td>
+          <td>/journalDetails/fetch/process</td>
+          <td>Returns a subset of all processes given a station_id. You can pass the followings as body parameter:
+              <ul>
+                <li><a>station_id</a>: Int - MANDATORY</li>
+              </ul>
+          </td>
+      </tr>
+      <tr>
           <td>GET</td>
           <td>/material/list</td>
           <td>Returns all materials</td>

@@ -65,3 +65,46 @@ exports.filterAll = (req, res) => {
         });
       });
   };
+
+  
+exports.fetchProcess = (req, res) => {
+  const station_id = req.body.station_id;
+
+  models.JournalDetails.findAll({
+    attributes: ["journalDetails_id", "journal_id", "station_id"],
+    include: [
+      {
+        model: models.JournalDetails_Operation, as: 'JournalDetails_Operations',
+        attributes: ["journalDetails_id", "operation_id"],
+        include : [
+          {
+            model: models.Operation, as: 'Operation',
+            attributes: ["operation_id"],
+            include : [
+              {
+                model: models.Process, as: 'Processes',
+                attributes: ["process_id"],
+                required: true
+              }
+            ],
+            required: true
+          }
+        ],
+        required: true 
+      }
+    ],
+    where: {
+      "station_id": { [Op.eq]: `${station_id}` }
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send({
+        message: "Error retrieving JournalDetail with station id=" + station_id
+      });
+    });
+};
+

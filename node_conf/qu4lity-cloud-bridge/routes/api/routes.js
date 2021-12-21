@@ -42,6 +42,7 @@ router.post("/journal/fetch/all", _journal.filterAll);
 router.get("/journalDetails/list", _journalDetail.findAll);
 router.post("/journalDetails/fetch/one", _journalDetail.filterOne);
 router.post("/journalDetails/fetch/all", _journalDetail.filterAll);
+router.post("/journalDetails/fetch/process", _journalDetail.fetchProcess);
 
 router.get("/material/list", _material.findAll);
 router.post("/material/fetch/one", _material.filterOne);

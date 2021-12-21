@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS MeasureFailure (
   CONSTRAINT measureFailure_fk_1 FOREIGN KEY (measure_id) REFERENCES Measure(measure_id) ON DELETE CASCADE,
   CONSTRAINT measureFailure_fk_2 FOREIGN KEY (failureType_id) REFERENCES FailureType(failureType_id) ON DELETE CASCADE
   );
-  
+
+
 -- ---------------------------------------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS Property (
